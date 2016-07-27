@@ -1,0 +1,2 @@
+#appJump
+可以查看当前正在前台第三方APP的className和packageName，并能保存为快捷方式方便以后一键打开第三方APP的指定页面 

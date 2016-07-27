@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/action_main"
+            android:checked="true"
+            android:icon="@mipmap/ic_home"
+            android:title="@string/Home"/>
+        <item
+            android:id="@+id/action_remove"
+            android:checked="true"
+            android:icon="@mipmap/ic_pay"
+            android:title="@string/Donate"/>
+
+        <item
+            android:id="@+id/action_settings"
+            android:icon="@mipmap/ic_settings"
+            android:title="@string/Settings"/>
+
+    </group>
+    <item
+        android:icon="@mipmap/ic_help"
+        android:id="@+id/action_help"
+        android:title="@string/help"/>
+    <item
+        android:id="@+id/action_evaluation"
+        android:icon="@mipmap/ic_about"
+        android:title="@string/toEevaluation"/>
+</menu>

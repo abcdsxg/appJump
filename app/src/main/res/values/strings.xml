@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">IntentJump</string>
+    <string name="Home">主界面</string>
+    <string name="Donate">捐赠应用</string>
+    <string name="Settings">应用设置</string>
+    <string name="help">帮助和反馈</string>
+    <string name="toEevaluation">去评价</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="copySuccess">复制成功</string>
+    <string name="myEmail">abcdsxg@gmail.com</string>
+    <string name="watchVideoText">查看视频帮助</string>
+    <string name="watchQuestionText">查看常见问题</string>
+    <string name="evaluation">意见反馈:</string>
+    <string name="evaluationText">有任何意见或者问题请发邮件至abcdsxg@gmail.com</string>
+    <string name="copyEmailText">(点击可复制邮箱)</string>
+    <string name="theNewVersion">已经是最新版本</string>
+    <string name="updateDialogTitle">软件版本更新</string>
+    <string name="updateText">更新</string>
+    <string name="nextTime">下次再说</string>
+    <string name="checkUpdateText">检查更新</string>
+    <string name="zfb">支付宝:18336739503</string>
+    <string name="wx">微信:syg596913711 \t\t(点击可复制)</string>
+    <string name="donateText">捐赠是为了作者更有动力继续做下去，捐赠者可以将名字或者昵称写在备注里，你将会出现在下面的捐赠列表中</string>
+    <string name="donatePageText">捐 赠 列 表</string>
+    <string name="ppText">PayPal:abcdsxg@mail.com</string>
+    <string name="exitText">再按一次退出</string>
+    <string name="cancel">取消</string>
+</resources>
