@@ -15,7 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
 import java.util.List;
-import cn.abcdsxg.app.appJump.Data.AppInfo;
+import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
 import cn.abcdsxg.app.appJump.Data.Utils.SuUtils;
 import cn.abcdsxg.app.appJump.R;
 

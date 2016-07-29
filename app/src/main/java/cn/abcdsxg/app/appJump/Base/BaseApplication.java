@@ -1,7 +1,9 @@
 package cn.abcdsxg.app.appJump.Base;
 
 import android.app.Application;
+import android.content.Context;
 
+import cn.abcdsxg.app.appJump.Data.greenDao.DBManager;
 /**
  * Author : 时小光
  * Email  : abcdsxg@gmail.com
@@ -11,6 +13,7 @@ import android.app.Application;
 public class BaseApplication extends Application {
 
     private static BaseApplication application;
+    public static DBManager dbManager;
 
     @Override
     public void onCreate()

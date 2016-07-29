@@ -1,6 +1,7 @@
 package cn.abcdsxg.app.appJump.Data.Adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.abcdsxg.app.appJump.Data.AppInfo;
+import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
+import cn.abcdsxg.app.appJump.Data.Utils.ToolUtils;
 import cn.abcdsxg.app.appJump.R;
 
 /**
@@ -26,7 +30,7 @@ public class GridViewAdapter extends BaseAdapter {
     Context mContext;
     List<AppInfo> appInfos;
 
-    GridViewAdapter(Context context, List<AppInfo> appInfos) {
+    public GridViewAdapter(Context context, List<AppInfo> appInfos) {
         mContext = context;
         this.appInfos = appInfos;
     }
@@ -57,9 +61,13 @@ public class GridViewAdapter extends BaseAdapter {
             holder= (ViewHolder) view.getTag();
         }
         AppInfo info=appInfos.get(i);
-        String pkgName=info.getPkgName();
-
-
+        Drawable icon= ToolUtils.getAppIcon(mContext,info.getPkgName());
+        holder.appName.setText(info.getAppName());
+        //holder.appIcon.setImageDrawable(icon);
+        Glide.with(mContext)
+                .load("")
+                .placeholder(icon)
+                .into(holder.appIcon);
         return view;
     }
 

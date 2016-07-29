@@ -6,7 +6,7 @@ import java.io.DataOutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import cn.abcdsxg.app.appJump.Data.AppInfo;
+import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
 
 /**
  * Author : 时小光

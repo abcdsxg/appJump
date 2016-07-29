@@ -20,7 +20,9 @@ android {
     }
 }
 
-
+greendao{
+    targetGenDir 'src/main/java'
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

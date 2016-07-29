@@ -1,4 +1,4 @@
-package cn.abcdsxg.app.appJump.Data;
+package cn.abcdsxg.app.appJump.Data.greenDao;
 
 
 import org.greenrobot.greendao.annotation.Entity;
@@ -16,6 +16,8 @@ import org.greenrobot.greendao.annotation.Generated;
 public class AppInfo {
     @Id(autoincrement = true)
     private long id;
+    @Property(nameInDb = "page")
+    private int page;
     @Property(nameInDb = "pkgName")
     private String pkgName;
     @Property(nameInDb = "clsName")
@@ -23,29 +25,35 @@ public class AppInfo {
     @Property(nameInDb = "AppName")
     private String AppName;
 
-
     public AppInfo(String pkgName, String clsName) {
         this.pkgName = pkgName;
         this.clsName = clsName;
     }
 
-    public AppInfo(String pkgName, String clsName, String appName) {
+
+    public AppInfo(String pkgName, String clsName, String AppName, int page) {
         this.pkgName = pkgName;
         this.clsName = clsName;
-        AppName = appName;
+        this.AppName = AppName;
+        this.page=page;
     }
 
-    @Generated(hash = 695700962)
-    public AppInfo(long id, String pkgName, String clsName, String AppName) {
+
+    @Generated(hash = 823399282)
+    public AppInfo(long id, int page, String pkgName, String clsName, String AppName) {
         this.id = id;
+        this.page = page;
         this.pkgName = pkgName;
         this.clsName = clsName;
         this.AppName = AppName;
     }
 
+
     @Generated(hash = 1656151854)
     public AppInfo() {
     }
+
+
 
     public String getPkgName() {
         return pkgName;
@@ -77,6 +85,14 @@ public class AppInfo {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 
     @Override

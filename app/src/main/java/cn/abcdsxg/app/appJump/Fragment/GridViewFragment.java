@@ -8,8 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import cn.abcdsxg.app.appJump.Base.BaseFragment;
+import cn.abcdsxg.app.appJump.Data.Adapter.GridViewAdapter;
+import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
+import cn.abcdsxg.app.appJump.Data.greenDao.DBManager;
 import cn.abcdsxg.app.appJump.R;
 
 /**
@@ -22,9 +27,11 @@ public class GridViewFragment extends BaseFragment {
 
     public static final String PAGE_NUM = "PAGE_NUM";
     @BindView(R.id.gridViewApp)
-    GridView gridViewApp;
+    GridView gridView;
+    GridViewAdapter mAdapter;
+    List<AppInfo> appInfos;
     private int mPageNum;
-
+    private DBManager dbManager;
     @Override
     public View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_gridview, container, false);
@@ -41,13 +48,15 @@ public class GridViewFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbManager=DBManager.getInstance();
         mPageNum = getArguments().getInt(PAGE_NUM);
+        appInfos= dbManager.queryAppInfoList();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        mAdapter=new GridViewAdapter(mApplication,appInfos);
 
     }
 
