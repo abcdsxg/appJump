@@ -33,6 +33,7 @@ dependencies {
     compile 'org.greenrobot:greendao:3.0.1'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'com.zhy:okhttputils:2.6.1'
+    compile 'com.github.clans:fab:1.6.4'
     compile 'com.github.bumptech.glide:glide:3.6.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha2'

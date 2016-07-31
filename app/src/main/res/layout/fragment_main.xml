@@ -1,32 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.CoordinatorLayout
+
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
+            android:fitsSystemWindows="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabMode="scrollable"/>
+            android:layout_height="?attr/actionBarSize"/>
+    </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:layout_marginBottom="40dp"
-            android:layout_marginRight="40dp"
-            app:borderWidth="0dp"/>
-    </android.support.design.widget.CoordinatorLayout>
-</LinearLayout>
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/fabRight"
+        android:layout_marginBottom="@dimen/fabBottom"
+        app:menu_labels_position="left"
+        android:layout_gravity="right|bottom|end">
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabNewCustome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/fab_add"
+        fab:fab_label="添加自定义" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabNewTab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_about"
+        fab:fab_label="添加标签页"/>
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabEditTab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_about"
+        fab:fab_label="编辑标签名"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</android.support.design.widget.CoordinatorLayout>

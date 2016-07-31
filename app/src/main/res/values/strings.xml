@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IntentJump</string>
+    <string name="app_name">应用页面跳转</string>
     <string name="Home">主界面</string>
     <string name="Donate">捐赠应用</string>
     <string name="Settings">应用设置</string>

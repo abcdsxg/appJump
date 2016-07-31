@@ -29,6 +29,8 @@
         <service android:name=".Service.GetAppInfoService">
 
         </service>
+
+        <activity android:name=".Activity.ItemActivity"/>
     </application>
 
 </manifest>

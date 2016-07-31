@@ -22,11 +22,12 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, long.class, "id", true, "_id");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Page = new Property(1, int.class, "page", false, "page");
-        public final static Property PkgName = new Property(2, String.class, "pkgName", false, "pkgName");
-        public final static Property ClsName = new Property(3, String.class, "clsName", false, "clsName");
-        public final static Property AppName = new Property(4, String.class, "AppName", false, "AppName");
+        public final static Property PagePos = new Property(2, int.class, "pagePos", false, "pagePos");
+        public final static Property PkgName = new Property(3, String.class, "pkgName", false, "pkgName");
+        public final static Property ClsName = new Property(4, String.class, "clsName", false, "clsName");
+        public final static Property AppName = new Property(5, String.class, "AppName", false, "AppName");
     };
 
 
@@ -42,11 +43,12 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"APP_INFO\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"page\" INTEGER NOT NULL ," + // 1: page
-                "\"pkgName\" TEXT," + // 2: pkgName
-                "\"clsName\" TEXT," + // 3: clsName
-                "\"AppName\" TEXT);"); // 4: AppName
+                "\"pagePos\" INTEGER NOT NULL ," + // 2: pagePos
+                "\"pkgName\" TEXT," + // 3: pkgName
+                "\"clsName\" TEXT," + // 4: clsName
+                "\"AppName\" TEXT);"); // 5: AppName
     }
 
     /** Drops the underlying database table. */
@@ -58,71 +60,83 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, AppInfo entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
         stmt.bindLong(2, entity.getPage());
+        stmt.bindLong(3, entity.getPagePos());
  
         String pkgName = entity.getPkgName();
         if (pkgName != null) {
-            stmt.bindString(3, pkgName);
+            stmt.bindString(4, pkgName);
         }
  
         String clsName = entity.getClsName();
         if (clsName != null) {
-            stmt.bindString(4, clsName);
+            stmt.bindString(5, clsName);
         }
  
         String AppName = entity.getAppName();
         if (AppName != null) {
-            stmt.bindString(5, AppName);
+            stmt.bindString(6, AppName);
         }
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, AppInfo entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
         stmt.bindLong(2, entity.getPage());
+        stmt.bindLong(3, entity.getPagePos());
  
         String pkgName = entity.getPkgName();
         if (pkgName != null) {
-            stmt.bindString(3, pkgName);
+            stmt.bindString(4, pkgName);
         }
  
         String clsName = entity.getClsName();
         if (clsName != null) {
-            stmt.bindString(4, clsName);
+            stmt.bindString(5, clsName);
         }
  
         String AppName = entity.getAppName();
         if (AppName != null) {
-            stmt.bindString(5, AppName);
+            stmt.bindString(6, AppName);
         }
     }
 
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.getLong(offset + 0);
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
     public AppInfo readEntity(Cursor cursor, int offset) {
         AppInfo entity = new AppInfo( //
-            cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getInt(offset + 1), // page
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // pkgName
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // clsName
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // AppName
+            cursor.getInt(offset + 2), // pagePos
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // pkgName
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // clsName
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // AppName
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, AppInfo entity, int offset) {
-        entity.setId(cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setPage(cursor.getInt(offset + 1));
-        entity.setPkgName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setClsName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setAppName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setPagePos(cursor.getInt(offset + 2));
+        entity.setPkgName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setClsName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setAppName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

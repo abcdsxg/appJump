@@ -14,67 +14,67 @@ import static android.content.Context.MODE_APPEND;
 public class SpUtil {
     
     public static int mode=MODE_APPEND;
-    
-    public static boolean  getBooleanSp(Context context, String name,String tag){
+    public static String name="config";
+    public static boolean  getBooleanSp(Context context , String tag){
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         return sp.getBoolean(tag, false);
     }
 
-    public static String  getStringSp(Context context, String name,String tag){
+    public static String  getStringSp(Context context, String tag){
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         return sp.getString(tag, null);
     }
 
-    public static int  getIntSp(Context context, String name,String tag){
+    public static int  getIntSp(Context context, String tag){
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         return sp.getInt(tag,-1);
     }
 
-    public static float  getFloatSp(Context context, String name,String tag){
+    public static float  getFloatSp(Context context, String tag){
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         return sp.getFloat(tag,0);
     }
-    public static long  getLongSp(Context context, String name,String tag){
+    public static long  getLongSp(Context context, String tag){
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         return sp.getLong(tag,0);
     }
 
-    public static Set<String> getSetStringSp(Context context, String name,String tag){
+    public static Set<String> getSetStringSp(Context context, String tag){
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         return sp.getStringSet(tag,null);
     }
     
-    public static void saveSp(Context context,String name,String tag,boolean bool) {
+    public static void saveSp(Context context, String tag,boolean bool) {
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         SharedPreferences.Editor edit=sp.edit();
         edit.putBoolean(tag,bool);
         edit.apply();
     }
-    public static void saveSp(Context context,String name,String tag,String msg) {
+    public static void saveSp(Context context, String tag,String msg) {
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         SharedPreferences.Editor edit=sp.edit();
         edit.putString(tag,msg);
         edit.apply();
     }
-    public static void saveSp(Context context,String name,String tag,int msg) {
+    public static void saveSp(Context context, String tag,int msg) {
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         SharedPreferences.Editor edit=sp.edit();
         edit.putInt(tag,msg);
         edit.apply();
     }
-    public static void saveSp(Context context,String name,String tag,float msg) {
+    public static void saveSp(Context context, String tag,float msg) {
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         SharedPreferences.Editor edit=sp.edit();
         edit.putFloat(tag,msg);
         edit.apply();
     }
-    public static void saveSp(Context context,String name,String tag,long msg) {
+    public static void saveSp(Context context, String tag,long msg) {
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         SharedPreferences.Editor edit=sp.edit();
         edit.putLong(tag,msg);
         edit.apply();
     }
-    public static void saveSp(Context context,String name,String tag,Set<String> msg) {
+    public static void saveSp(Context context, String tag,Set<String> msg) {
         SharedPreferences sp=context.getSharedPreferences(name,mode);
         SharedPreferences.Editor edit=sp.edit();
         edit.putStringSet(tag,msg);

@@ -38,7 +38,6 @@ public class HelpFragment extends BaseFragment implements View.OnClickListener {
     LinearLayout suggestion;
     @BindView(R.id.checkUpdate)
     LinearLayout checkUpdate;
-    private Unbinder unbinder;
 
 
     @Override
@@ -84,21 +83,4 @@ public class HelpFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPageStart(getClass().getSimpleName());
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onPageEnd(getClass().getSimpleName());
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        unbinder.unbind();
-    }
 }

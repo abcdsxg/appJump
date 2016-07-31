@@ -51,7 +51,8 @@ public class SuUtils {
 
     //执行启动指定app的命令并返回结果
     public static boolean startApp(String packageName,String className,String extra){
-        command = "am start -n " + packageName + "/" + className;
+        String data=extra==null?"":" "+extra;
+        command = "am start -n " + packageName + "/" + className + data;
         Process process = null;
         DataOutputStream outputStream=null;
         try {

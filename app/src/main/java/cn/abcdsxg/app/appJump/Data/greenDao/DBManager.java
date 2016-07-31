@@ -134,6 +134,17 @@ public class DBManager {
         appInfoDao.deleteAll();
     }
     /**
+     * 查询获取一条数据
+     *
+     */
+    public List<AppInfo> queryAppInfo(Long id){
+        AppInfoDao appInfoDao = getWriteableAppInfoDao();
+        QueryBuilder<AppInfo> qb = appInfoDao.queryBuilder();
+        qb.where(AppInfoDao.Properties.Id.eq(id));
+        List<AppInfo> list = qb.list();
+        return list;
+    }
+    /**
      * 查询获取数据列表
      *
      */
@@ -150,7 +161,7 @@ public class DBManager {
     public List<AppInfo> queryAppInfoListByPage(int page){
         AppInfoDao appInfoDao = getWriteableAppInfoDao();
         QueryBuilder<AppInfo> qb = appInfoDao.queryBuilder();
-        qb.where(AppInfoDao.Properties.Page.eq(page)).orderAsc(AppInfoDao.Properties.Id);
+        qb.where(AppInfoDao.Properties.Page.eq(page)).orderAsc(AppInfoDao.Properties.PagePos);
         List<AppInfo> list = qb.list();
         return list;
     }

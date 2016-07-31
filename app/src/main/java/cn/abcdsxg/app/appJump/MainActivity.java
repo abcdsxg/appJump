@@ -16,11 +16,16 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.umeng.analytics.MobclickAgent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import cn.abcdsxg.app.appJump.Base.BaseActivity;
 import cn.abcdsxg.app.appJump.Data.Adapter.MainAdapter;
+import cn.abcdsxg.app.appJump.Data.Constant;
+import cn.abcdsxg.app.appJump.Data.Utils.SpUtil;
+import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
+import cn.abcdsxg.app.appJump.Data.greenDao.DBManager;
 import cn.abcdsxg.app.appJump.Fragment.DonateFragment;
 import cn.abcdsxg.app.appJump.Fragment.HelpFragment;
 import cn.abcdsxg.app.appJump.Fragment.MainFragment;
@@ -38,8 +43,6 @@ public class MainActivity extends BaseActivity {
     NavigationView mNavigationView;
     @BindView(R.id.drawLayout)
     DrawerLayout mDrawLayout;
-    @BindView(R.id.fabBtn)
-    FloatingActionButton fabBtn;
     private ActionBarDrawerToggle mDrawerToggle;
 
 
@@ -56,8 +59,35 @@ public class MainActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
+        initData();
         initService();
         setupDrawerContent();
+    }
+
+    private void initData() {
+        if(SpUtil.getIntSp(this,"isFirst")==-1){
+            initDB();
+            SpUtil.saveSp(this,"isFirst",1);
+        }
+    }
+
+    private void initDB() {
+        DBManager dbManager=DBManager.getInstance();
+        List<AppInfo> appInfos=new ArrayList<>();
+        appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_MONEY,"转账",0,1));
+        appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_MONEY_CODE,"付款码",0,2));
+        appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_SCAN,"扫一扫",1,1));
+        appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_MONEY_CODE,"收付款",2,2));
+        appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_MONEY,"转账",2,3));
+        appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_SCAN,"扫一扫",2,1));
+//        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_QIANBAO,"QQ钱包",1,null));
+//        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_SCAN,"QQ扫一扫",1,null));
+//        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_SHUOSHUO,"QQ发说说",1,null));
+//        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_ZONE,"QQ看空间",1,null));
+//        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_LIMIXIU,"QQ厘米秀",1,null));
+        dbManager.insertAppInfoList(appInfos);
+        SpUtil.saveSp(this,"MaxTabNum",1);
+        SpUtil.saveSp(this,"0","支付/扫码");
     }
 
     private void initService() {

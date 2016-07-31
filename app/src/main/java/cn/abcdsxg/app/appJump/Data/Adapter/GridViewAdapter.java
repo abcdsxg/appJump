@@ -2,6 +2,7 @@ package cn.abcdsxg.app.appJump.Data.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder holder = null;
+        ViewHolder holder;
         if (view == null) {
             view = LayoutInflater.from(mContext).inflate(R.layout.item_gridview, viewGroup, false);
             holder = new ViewHolder(view);
@@ -63,7 +64,6 @@ public class GridViewAdapter extends BaseAdapter {
         AppInfo info=appInfos.get(i);
         Drawable icon= ToolUtils.getAppIcon(mContext,info.getPkgName());
         holder.appName.setText(info.getAppName());
-        //holder.appIcon.setImageDrawable(icon);
         Glide.with(mContext)
                 .load("")
                 .placeholder(icon)
