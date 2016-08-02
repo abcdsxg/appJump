@@ -27,4 +27,8 @@
         android:id="@+id/action_evaluation"
         android:icon="@mipmap/ic_about"
         android:title="@string/toEevaluation"/>
+    <item
+        android:id="@+id/action_exit"
+        android:icon="@mipmap/exit"
+        android:title="退出"/>
 </menu>

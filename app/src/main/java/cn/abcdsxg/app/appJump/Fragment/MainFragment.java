@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.umeng.analytics.MobclickAgent;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.abcdsxg.app.appJump.Activity.ItemActivity;
@@ -46,8 +47,8 @@ public class MainFragment extends BaseFragment {
 
 
     private GridViewFragmentPageAdapter fragmentPagerAdapter;
-    final static int ADDNEWTAB=1;
-    final static int EDITTAB=2;
+    private final static int ADDNEWTAB=1;
+    private final static int EDITTAB=2;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,7 @@ public class MainFragment extends BaseFragment {
 
     //fab按钮的点击事件
     @OnClick({R.id.fabNewCustome, R.id.fabNewTab,R.id.fabEditTab})
-    public void fabBtnClick(View view) {
+    void fabBtnClick(View view) {
         switch (view.getId()) {
             case R.id.fabNewCustome:
                 addNewAppInfo();
@@ -94,7 +95,7 @@ public class MainFragment extends BaseFragment {
     }
 
 
-    public void showDialog(String tilte, final int flag) {
+    private void showDialog(String tilte, final int flag) {
         View dialogView = LayoutInflater.from(mApplication).inflate(R.layout.dialog_edit, null);
         final EditText editText = (EditText) dialogView.findViewById(R.id.editText);
         if(flag==EDITTAB){
@@ -118,6 +119,7 @@ public class MainFragment extends BaseFragment {
                                 SpUtil.saveSp(mApplication,"MaxTabNum",maxTabNum+1);
                                 SpUtil.saveSp(mApplication, String.valueOf(maxTabNum), text);
                                 fragmentPagerAdapter.notifyDataSetChanged();
+                                MobclickAgent.onEvent(getContext(), "newTab");
                             }else{
                                 //编辑tab标题
                                 SpUtil.saveSp(mApplication, String.valueOf(viewpager.getCurrentItem()), text);

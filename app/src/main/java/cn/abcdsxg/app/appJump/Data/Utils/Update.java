@@ -73,7 +73,7 @@ public class Update  {
                                 String savePath = Environment
                                         .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
 
-                                saveFileName = savePath + "/SyncSend.apk";
+                                saveFileName = savePath +"/"+mContext.getPackageName()+ ".apk";
                                 URL url = new URL(apkUrl);
                                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                                 conn.connect();

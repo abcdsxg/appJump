@@ -3,10 +3,9 @@ package cn.abcdsxg.app.appJump.Base;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
+import com.umeng.analytics.MobclickAgent;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
 /**
  * Author : 时小光
  * Email  : abcdsxg@gmail.com
@@ -33,5 +32,16 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
     }
 }

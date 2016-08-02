@@ -19,11 +19,10 @@
     <string name="updateText">更新</string>
     <string name="nextTime">下次再说</string>
     <string name="checkUpdateText">检查更新</string>
-    <string name="zfb">支付宝:18336739503</string>
-    <string name="wx">微信:syg596913711 \t\t(点击可复制)</string>
+    <string name="zfb">18336739503</string>
+    <string name="wx">syg596913711</string>
     <string name="donateText">捐赠是为了作者更有动力继续做下去，捐赠者可以将名字或者昵称写在备注里，你将会出现在下面的捐赠列表中</string>
     <string name="donatePageText">捐 赠 列 表</string>
-    <string name="ppText">PayPal:abcdsxg@mail.com</string>
     <string name="exitText">再按一次退出</string>
     <string name="cancel">取消</string>
 </resources>

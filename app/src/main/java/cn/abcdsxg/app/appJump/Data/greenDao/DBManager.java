@@ -126,6 +126,15 @@ public class DBManager {
         appInfoDao.delete(appInfo);
     }
     /**
+     * 根据id删除一条记录
+     *
+     * @param id
+     */
+    public void deleteAppInfo(Long id){
+        AppInfoDao appInfoDao = getWriteableAppInfoDao();
+        appInfoDao.deleteByKey(id);
+    }
+    /**
      * 删除所有记录
      *
      */

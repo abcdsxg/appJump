@@ -12,11 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.umeng.analytics.MobclickAgent;
-
 import butterknife.BindView;
-import butterknife.Unbinder;
 import cn.abcdsxg.app.appJump.Base.BaseFragment;
 import cn.abcdsxg.app.appJump.Data.Utils.Update;
 import cn.abcdsxg.app.appJump.R;
@@ -59,19 +56,19 @@ public class HelpFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.videoHelp:
-                MobclickAgent.onEvent(mApplication, "CilckWatchVideo");
+                MobclickAgent.onEvent(mApplication, "WatchVideo");
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("http://www.abcdsxg.cn/app/google/syncsend/video.php"));
+                intent.setData(Uri.parse("http://www.abcdsxg.cn/app/google/appJump/video.php"));
                 startActivity(intent);
                 break;
             case R.id.questions:
-                MobclickAgent.onEvent(mApplication, "CilckWatchQuestions");
+                MobclickAgent.onEvent(mApplication, "WatchQuestions");
                 intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("http://www.abcdsxg.cn/app/google/syncsend/question.html"));
+                intent.setData(Uri.parse("http://www.abcdsxg.cn/app/google/appJump/question.html"));
                 startActivity(intent);
                 break;
             case R.id.checkUpdate:
-                Update update = new Update(mApplication, 1);
+                Update update = new Update(getContext(), 1);
                 update.checkUpdateInfo();
                 break;
             case R.id.suggestion:

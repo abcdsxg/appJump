@@ -6,7 +6,7 @@ android {
     buildToolsVersion "24.0.0"
     defaultConfig {
         applicationId "cn.abcdsxg.app.appJump"
-        minSdkVersion 19
+        minSdkVersion 14
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -16,9 +16,30 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    output.outputFile = new File(outputFile.parent, outputFile.name.replace(".apk","-${variant.versionName}.apk"))
+
+                }
+            }
         }
     }
+    productFlavors {
+
+        googlePlay {}
+        abcdsxg {}
+        coolapk {}
+        baidu{}
+        yingyongbao{}
+
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+
+    }
 }
+
 
 greendao{
     targetGenDir 'src/main/java'

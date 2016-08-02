@@ -54,7 +54,6 @@ public abstract class BaseFragment extends Fragment {
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageStart(getClass().getSimpleName());
-        Log.e("tag", "onPause: "+getClass().getSimpleName() );
     }
 
     @Override

@@ -1,12 +1,9 @@
 package cn.abcdsxg.app.appJump.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +17,6 @@ import cn.abcdsxg.app.appJump.Base.BaseFragment;
 import cn.abcdsxg.app.appJump.Data.Adapter.GridViewAdapter;
 import cn.abcdsxg.app.appJump.Data.Utils.SuUtils;
 import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
-import cn.abcdsxg.app.appJump.Data.greenDao.AppInfoDao;
 import cn.abcdsxg.app.appJump.Data.greenDao.DBManager;
 import cn.abcdsxg.app.appJump.R;
 
@@ -64,7 +60,6 @@ public class GridViewFragment extends BaseFragment {
         dbManager=DBManager.getInstance();
         mPageNum = getArguments().getInt(PAGE_NUM);
         appInfos= dbManager.queryAppInfoListByPage(mPageNum);
-        Log.e(TAG, "pos: "+mPageNum+",appInfoSize:"+appInfos.size() );
     }
 
     @Override
