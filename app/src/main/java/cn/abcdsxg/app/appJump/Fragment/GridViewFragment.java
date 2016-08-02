@@ -1,9 +1,12 @@
 package cn.abcdsxg.app.appJump.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +76,13 @@ public class GridViewFragment extends BaseFragment {
     @OnItemClick(R.id.gridViewApp)
     void onClickItem(int pos){
         AppInfo appInfo=appInfos.get(pos);
+        String pkgName=appInfo.getPkgName();
+        //检查应用是否停用，并启用已停用的应用
+        PackageManager pm=mApplication.getPackageManager();
+        int statue=pm.getApplicationEnabledSetting(pkgName);
+        if(statue!=PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+            SuUtils.enableApp(pkgName);
+        }
         SuUtils.startApp(appInfo.getPkgName(),appInfo.getClsName(),null);
     }
 

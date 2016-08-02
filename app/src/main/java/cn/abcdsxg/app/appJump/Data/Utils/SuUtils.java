@@ -84,6 +84,40 @@ public class SuUtils {
         return false;
     }
 
+    //启用已停用的应用
+    public static boolean enableApp(String packageName) {
+        command = "pm enable " + packageName;
+        Process process = null;
+        DataOutputStream outputStream=null;
+        try {
+            //获取root权限并执行command命令
+            process = Runtime.getRuntime().exec("su");
+            outputStream = new DataOutputStream(process.getOutputStream());
+            outputStream.write(command.getBytes());
+            outputStream.writeBytes("\n");
+            outputStream.flush();
+            outputStream.writeBytes("exit\n");
+            outputStream.flush();
+            int exitValue= process.waitFor();
+            //判断获取root是否成功
+            if(exitValue==0){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (outputStream != null) { outputStream.close();   }
+                if (process!=null       ) { process.destroy();      }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+
+    }
     public static AppInfo getAppInfo(){
         command = "dumpsys activity | grep mFocusedActivity";
         Process process = null;
