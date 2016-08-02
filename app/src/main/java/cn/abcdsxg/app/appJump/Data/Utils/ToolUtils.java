@@ -69,7 +69,7 @@ public class ToolUtils {
     }
     @TargetApi(Build.VERSION_CODES.M)
     public static boolean checkPermission(final Activity activity) {
-        if(Build.VERSION.SDK_INT<Build.VERSION_CODES.LOLLIPOP){
+        if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
             return true;
         }
         int hasWriteContactsPermission = activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
