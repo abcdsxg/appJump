@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -31,6 +32,7 @@ import cn.abcdsxg.app.appJump.Data.greenDao.DBManager;
 import cn.abcdsxg.app.appJump.Fragment.DonateFragment;
 import cn.abcdsxg.app.appJump.Fragment.HelpFragment;
 import cn.abcdsxg.app.appJump.Fragment.MainFragment;
+import cn.abcdsxg.app.appJump.Fragment.SettingFragment;
 import cn.abcdsxg.app.appJump.Service.GetAppInfoService;
 
 public class MainActivity extends BaseActivity {
@@ -150,9 +152,9 @@ public class MainActivity extends BaseActivity {
                         MobclickAgent.onEvent(MainActivity.this, "Donate");
                         break;
                     case R.id.action_settings:
-//                        getSupportFragmentManager().beginTransaction()
-//                                .replace(R.id.main_content, new SettingFragment()).commit();
-//                        mTitle = getString(R.string.Settings);
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.main_content, new SettingFragment()).commit();
+                        mTitle = getString(R.string.Settings);
                         MobclickAgent.onEvent(MainActivity.this, "Settings");
                         showToast("设置暂时不知道放什么功能呢，等你来反馈");
                         break;

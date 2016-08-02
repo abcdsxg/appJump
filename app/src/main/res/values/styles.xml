@@ -32,4 +32,10 @@
         <item name="android:textSize">18sp</item>
         <item name="android:padding">20dp</item>
     </style>
+
+    <style name="longClickText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:padding">15dp</item>
+    </style>
 </resources>

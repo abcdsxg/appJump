@@ -1,24 +1,26 @@
 package cn.abcdsxg.app.appJump.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.TextView;
+
 import java.util.List;
 import butterknife.BindView;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 import cn.abcdsxg.app.appJump.Activity.ItemActivity;
 import cn.abcdsxg.app.appJump.Base.BaseFragment;
 import cn.abcdsxg.app.appJump.Data.Adapter.GridViewAdapter;
 import cn.abcdsxg.app.appJump.Data.Utils.SuUtils;
+import cn.abcdsxg.app.appJump.Data.Utils.ToolUtils;
 import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
 import cn.abcdsxg.app.appJump.Data.greenDao.DBManager;
 import cn.abcdsxg.app.appJump.R;
@@ -76,23 +78,43 @@ public class GridViewFragment extends BaseFragment {
     @OnItemClick(R.id.gridViewApp)
     void onClickItem(int pos){
         AppInfo appInfo=appInfos.get(pos);
-        String pkgName=appInfo.getPkgName();
-        //检查应用是否停用，并启用已停用的应用
-        PackageManager pm=mApplication.getPackageManager();
-        int statue=pm.getApplicationEnabledSetting(pkgName);
-        if(statue!=PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
-            SuUtils.enableApp(pkgName);
-        }
-        SuUtils.startApp(appInfo.getPkgName(),appInfo.getClsName(),null);
+        SuUtils.startApp(mApplication,appInfo.getPkgName(),appInfo.getClsName(),null);
     }
 
     @OnItemLongClick(R.id.gridViewApp)
     boolean onLongClickItem(int pos){
         AppInfo appInfo=appInfos.get(pos);
-        Intent intent=new Intent(mApplication, ItemActivity.class);
-        intent.putExtra("id",appInfo.getId());
-        startActivity(intent);
+        showDialog(appInfo);
         return true;
+    }
+
+    //显示对话框选项
+    AlertDialog longClickDialog;
+    private void showDialog(final AppInfo appInfo) {
+        View view=LayoutInflater.from(mApplication)
+                .inflate(R.layout.dialog_longclick,null);
+        TextView creatShortCut=(TextView)view.findViewById(R.id.creatShortCut);
+        TextView edit=(TextView)view.findViewById(R.id.edit);
+        longClickDialog=new AlertDialog.Builder(getContext())
+                .setView(view)
+                .show();
+        creatShortCut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                longClickDialog.dismiss();
+                //创建快捷方式
+                ToolUtils.getShortcutToDesktopIntent(mApplication,appInfo);
+            }
+        });
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                longClickDialog.dismiss();
+                Intent intent=new Intent(mApplication, ItemActivity.class);
+                intent.putExtra("id",appInfo.getId());
+                startActivity(intent);
+            }
+        });
     }
 
 

@@ -7,17 +7,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-
-import java.util.List;
+import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
 
 /**
  * Author : 时小光
@@ -27,7 +24,7 @@ import java.util.List;
  */
 public class ToolUtils {
 
-    final static int REQUEST_CODE_ASK_PERMISSIONS=10;
+    private final static int REQUEST_CODE_ASK_PERMISSIONS=10;
 
     public static Drawable getAppIcon(Context context,String pkgName){
         PackageManager pm=context.getPackageManager();
@@ -94,5 +91,33 @@ public class ToolUtils {
             return false;
         }
         return true;
+    }
+
+    //创建桌面快捷方式
+    public static void getShortcutToDesktopIntent(Context context, AppInfo appInfo) {
+        Intent intent = new Intent(Intent.ACTION_SHOW_APP_INFO);
+        intent.putExtra("id",appInfo.getId());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        // 不允许重建
+        shortcut.putExtra("duplicate", false);
+        // 设置名字
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME,appInfo.getAppName());
+        // 设置图标
+        Drawable drawableIcon=getAppIcon(context,appInfo.getPkgName());
+
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON,
+                drawableToBitamp(drawableIcon));
+        //添加appinfo的id
+        shortcut.putExtra("id",appInfo.getId());
+        // 设置意图和快捷方式关联程序
+        shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT,intent);
+        context.sendBroadcast(shortcut);
+
+    }
+
+    public static Bitmap drawableToBitamp(Drawable drawable) {
+        BitmapDrawable bd = (BitmapDrawable) drawable;
+        return bd.getBitmap();
     }
 }

@@ -6,14 +6,16 @@
 
     <ImageView
         android:id="@+id/appIcon"
-        android:layout_width="80dp"
-        android:layout_height="80dp" />
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
 
     <TextView
         android:id="@+id/appName"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="#444"
+        android:textSize="12sp"
+        android:ellipsize="end"
         android:text="支付宝"/>
 </LinearLayout>
