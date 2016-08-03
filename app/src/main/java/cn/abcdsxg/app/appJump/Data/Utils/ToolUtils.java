@@ -108,8 +108,6 @@ public class ToolUtils {
 
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON,
                 drawableToBitamp(drawableIcon));
-        //添加appinfo的id
-        shortcut.putExtra("id",appInfo.getId());
         // 设置意图和快捷方式关联程序
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT,intent);
         context.sendBroadcast(shortcut);

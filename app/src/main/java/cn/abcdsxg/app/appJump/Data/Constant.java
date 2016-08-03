@@ -23,5 +23,10 @@ public class Constant {
 //    public final static String QQ_QIANBAO="com.tencent.mobileqq.ooperation.qwallet.plugin.QWalletPluginProxyActivity";
 //    public final static String QQ_ZONE="com.tencent.mobileqq.ooperation.qzone.QzoneFeedsPluginProxyActivity";
 //    public final static String QQ_SHUOSHUO="com.tencent.mobileqq.ooperation.qzone.QzoneGPUPluginProxyActivity";
+    public final  static String  SHOWICON="showIcon";
+    public final  static String  FLUSHTIME="flushTime";
+    public final  static String  MAXTABNUM="MaxTabNum";
+    public final  static String  ISFIRST="isFirst";
+    public final  static String  SHOWCLSNAME="showClsName";
 
 }

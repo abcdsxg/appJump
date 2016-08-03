@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import cn.abcdsxg.app.appJump.Activity.ItemActivity;
+import cn.abcdsxg.app.appJump.Data.Constant;
+import cn.abcdsxg.app.appJump.Data.Utils.SpUtil;
 import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
 import cn.abcdsxg.app.appJump.Data.Utils.SuUtils;
 import cn.abcdsxg.app.appJump.R;
@@ -53,15 +55,18 @@ public class GetAppInfoService extends Service {
 //            cm.setPrimaryClip(ClipData.newPlainText("content", info.getClsName()));
 //            Toast.makeText(this, "类名复制成功", Toast.LENGTH_SHORT).show();
 //        }
+        //获取是否显示状态栏图标
+        boolean showIcon= SpUtil.getBooleanSp(this, Constant.SHOWICON);
+        boolean showClsName= SpUtil.getBooleanSp(this, Constant.SHOWCLSNAME);
         //设置notification并通知
         NotificationManager nf=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification=new NotificationCompat.Builder(getApplicationContext())
                 .setAutoCancel(false)
                 .setOngoing(true)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setPriority(showIcon?NotificationCompat.PRIORITY_MAX:NotificationCompat.PRIORITY_MIN)
                 .setContentTitle("点击新建自定义页面")
-                .setContentText("当前页面:"+info.getClsName())
+                .setContentText(showClsName?"当前页面:"+info.getClsName():"")
                 .setContentIntent(pendingIntent)
                 .build();
         nf.notify(0,notification);
@@ -92,6 +97,7 @@ public class GetAppInfoService extends Service {
         }
         //每秒获取一次
         Timer timer=new Timer();
+        int flushTime=SpUtil.getIntSp(this, Constant.FLUSHTIME);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -100,9 +106,10 @@ public class GetAppInfoService extends Service {
                 }else {
                     NotificationManager nf=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                     nf.cancelAll();
+                    stopSelf();
                 }
             }
-        },1000);
+        },flushTime);
     }
 
 

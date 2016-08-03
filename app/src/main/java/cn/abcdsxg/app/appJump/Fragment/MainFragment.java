@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import cn.abcdsxg.app.appJump.Activity.ItemActivity;
 import cn.abcdsxg.app.appJump.Base.BaseFragment;
 import cn.abcdsxg.app.appJump.Data.Adapter.GridViewFragmentPageAdapter;
+import cn.abcdsxg.app.appJump.Data.Constant;
 import cn.abcdsxg.app.appJump.Data.Utils.SpUtil;
 import cn.abcdsxg.app.appJump.R;
 
@@ -115,8 +116,8 @@ public class MainFragment extends BaseFragment {
                         } else {
                             if(flag==ADDNEWTAB) {
                                 //添加新tab页并保存tab数
-                                int maxTabNum=SpUtil.getIntSp(mApplication,"MaxTabNum");
-                                SpUtil.saveSp(mApplication,"MaxTabNum",maxTabNum+1);
+                                int maxTabNum=SpUtil.getIntSp(mApplication,Constant.MAXTABNUM);
+                                SpUtil.saveSp(mApplication, Constant.MAXTABNUM,maxTabNum+1);
                                 SpUtil.saveSp(mApplication, String.valueOf(maxTabNum), text);
                                 fragmentPagerAdapter.notifyDataSetChanged();
                                 MobclickAgent.onEvent(getContext(), "newTab");

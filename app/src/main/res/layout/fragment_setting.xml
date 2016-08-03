@@ -3,44 +3,114 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
     android:padding="16dp"
     android:minHeight="?android:listPreferredItemHeight"
-    android:orientation="horizontal">
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="通知栏设置"
+        android:layout_margin="5dp"
+        android:textSize="18sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_line"/>
 
     <RelativeLayout
-        android:layout_weight="1"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal"
-            android:text="title"
-            android:textColor="@color/colorPrimary"
+            android:text="状态栏显示图标"
+            android:layout_centerVertical="true"
+            android:textColor="@color/primary_text"
             android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/summary"
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switchShowIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@android:id/title"
-            android:text="summary"
-            android:textColor="#AAAAAA"
-            android:textSize="14sp"/>
-
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:checked="false"
+            android:gravity="center"/>
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@android:id/widget_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|center_vertical"
-        android:orientation="vertical">
+    <RelativeLayout
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通知栏显示当前页面类名"
+            android:layout_centerVertical="true"
+            android:textColor="@color/primary_text"
+            android:textSize="16sp"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switchShowClsName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:checked="true"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通知栏类名刷新时间间隔"
+            android:layout_centerVertical="true"
+            android:textColor="@color/primary_text"
+            android:textSize="16sp"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editFlushTime"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:inputType="number"
+            android:layout_alignParentRight="true"
+            android:gravity="center"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_line"/>
+
+
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="#fff"
+        android:textColor="@color/red500"
+        android:textSize="20sp"
+        android:text="保存设置"/>
+
 
 </LinearLayout>

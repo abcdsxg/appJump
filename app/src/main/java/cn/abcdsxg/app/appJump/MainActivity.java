@@ -71,10 +71,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initData() {
-        if(SpUtil.getIntSp(this,"isFirst")==-1){
+        if(SpUtil.getIntSp(this,Constant.ISFIRST)==-1){
             if(SuUtils.isRoot()) {
                 initDB();
-                SpUtil.saveSp(this, "isFirst", 1);
+                SpUtil.saveSp(this, Constant.ISFIRST, 1);
             }else{
                 showToast("你的设备没有root，部分功能将无法使用");
             }
@@ -96,8 +96,11 @@ public class MainActivity extends BaseActivity {
 //        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_ZONE,"QQ看空间",1,null));
 //        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_LIMIXIU,"QQ厘米秀",1,null));
         dbManager.insertAppInfoList(appInfos);
-        SpUtil.saveSp(this,"MaxTabNum",1);
+        SpUtil.saveSp(this,Constant.MAXTABNUM,1);
         SpUtil.saveSp(this,"0","支付/扫码");
+        SpUtil.saveSp(this, Constant.FLUSHTIME, 1000);
+        SpUtil.saveSp(this, Constant.SHOWCLSNAME, true);
+        SpUtil.saveSp(this, Constant.SHOWICON, false);
     }
 
     private void initService() {
@@ -156,7 +159,6 @@ public class MainActivity extends BaseActivity {
                                 .replace(R.id.main_content, new SettingFragment()).commit();
                         mTitle = getString(R.string.Settings);
                         MobclickAgent.onEvent(MainActivity.this, "Settings");
-                        showToast("设置暂时不知道放什么功能呢，等你来反馈");
                         break;
                     case R.id.action_help:
                         getSupportFragmentManager().beginTransaction()
