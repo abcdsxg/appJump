@@ -30,18 +30,29 @@ public class AppInfo {
     private String clsName;
     @Property(nameInDb = "AppName")
     private String AppName;
+    @Property(nameInDb = "extra")
+    private String extra;
 
     public AppInfo(String pkgName, String clsName) {
         this.pkgName = pkgName;
         this.clsName = clsName;
     }
 
-    public AppInfo(String pkgName, String clsName, String AppName, int page ,int pagePos) {
+    public AppInfo(String pkgName, String clsName, String AppName, int page ,int pagePos, String extra) {
         this.pkgName = pkgName;
         this.clsName = clsName;
         this.AppName = AppName;
         this.page=page;
         this.pagePos=pagePos;
+        this.extra=extra;
+    }
+
+    public String getExtra() {
+        return this.extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 
     public String getAppName() {
@@ -92,15 +103,15 @@ public class AppInfo {
         this.id = id;
     }
 
-    @Generated(hash = 716346491)
-    public AppInfo(Long id, int page, int pagePos, String pkgName, String clsName,
-            String AppName) {
+    @Generated(hash = 1591306973)
+    public AppInfo(Long id, int page, int pagePos, String pkgName, String clsName, String AppName, String extra) {
         this.id = id;
         this.page = page;
         this.pagePos = pagePos;
         this.pkgName = pkgName;
         this.clsName = clsName;
         this.AppName = AppName;
+        this.extra = extra;
     }
 
     @Generated(hash = 1656151854)

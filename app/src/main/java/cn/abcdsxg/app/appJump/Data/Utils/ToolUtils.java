@@ -14,6 +14,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
+
+import org.json.JSONObject;
+
+import java.util.Iterator;
+
 import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
 
 /**
@@ -117,5 +123,12 @@ public class ToolUtils {
     public static Bitmap drawableToBitamp(Drawable drawable) {
         BitmapDrawable bd = (BitmapDrawable) drawable;
         return bd.getBitmap();
+    }
+
+
+    public static String getKeyFromJson(JSONObject json){
+        Iterator<String> it=json.keys();
+        return it.next();
+
     }
 }

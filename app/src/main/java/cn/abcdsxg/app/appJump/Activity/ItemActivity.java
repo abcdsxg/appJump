@@ -3,20 +3,40 @@ package cn.abcdsxg.app.appJump.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.abcdsxg.app.appJump.Base.BaseActivity;
+import cn.abcdsxg.app.appJump.Data.Constant;
 import cn.abcdsxg.app.appJump.Data.Utils.SpUtil;
+import cn.abcdsxg.app.appJump.Data.Utils.ToolUtils;
 import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
 import cn.abcdsxg.app.appJump.Data.greenDao.DBManager;
 import cn.abcdsxg.app.appJump.R;
@@ -50,7 +70,9 @@ public class ItemActivity extends BaseActivity {
 
     private DBManager dbManager;
     private Long id;
-
+    private StringBuilder sb=new StringBuilder();
+    private StringBuilder jsonSb;
+    private StringBuilder proSb=new StringBuilder();
     @Override
     public int getViewId() {
         return R.layout.activity_item;
@@ -77,6 +99,73 @@ public class ItemActivity extends BaseActivity {
             editPage.setText(String.valueOf(appInfo.getPage() + 1));
             titleBar.setText("编辑当前AppInfo");
         } else {
+            //首先判断是否有传值
+            try {
+                File file = new File(Environment.getExternalStorageDirectory() + "/temp.json");
+                if (file.exists()) {
+                    BufferedReader reader = new BufferedReader(new FileReader(file));
+                    jsonSb = new StringBuilder("");
+                    String str = null;
+                    while ((str = reader.readLine()) != null) {
+                        jsonSb.append(str);
+                    }
+                }
+                Log.e("tag", "jsonSb: "+jsonSb );
+                if (!TextUtils.isEmpty(jsonSb.toString())) {
+                    JSONObject jsonObject = new JSONObject(jsonSb.toString());
+                    if (intent.getStringExtra("pkgName").equals(jsonObject.getString("pkgName"))) {
+                        Iterator it = jsonObject.keys();
+                        sb = new StringBuilder();
+                        proSb=new StringBuilder();
+                        while (it.hasNext()) {
+                            String key = it.next().toString();
+                            Log.e("tag", "key: "+key );
+                            if (key.contains("type")) {
+                                proSb.append(" -t ").append(jsonObject.getString(key));
+                            } else if (key.contains("data")) {
+                                proSb.append(" -d ").append(jsonObject.getString(key));
+                            } else if (key.contains("action")) {
+                                proSb.append(" -a ").append(jsonObject.getString(key));
+                            }else if (key.contains("String")) {
+                                JSONObject subJson=jsonObject.getJSONObject(key);
+                                key= ToolUtils.getKeyFromJson(subJson);
+                                Log.e("tag", "subkey: "+key );
+                                sb.append(" -es ").append(key).append(" ").append(subJson.getString(key));
+                            } else if (key.contains("Float")) {
+                                JSONObject subJson=jsonObject.getJSONObject(key);
+                                key= ToolUtils.getKeyFromJson(subJson);
+                                sb.append(" -ef ").append(key).append(" ").append(subJson.getString(key));
+                            } else if (key.contains("Integer")) {
+                                JSONObject subJson=jsonObject.getJSONObject(key);
+                                key= ToolUtils.getKeyFromJson(subJson);
+                                sb.append(" -ei ").append(key).append(" ").append(subJson.getString(key));
+                            } else if (key.contains("Boolean")) {
+                                JSONObject subJson=jsonObject.getJSONObject(key);
+                                key= ToolUtils.getKeyFromJson(subJson);
+                                sb.append(" -ez ").append(key).append(" ").append(subJson.getString(key));
+                            } else if (key.contains("Long")) {
+                                JSONObject subJson=jsonObject.getJSONObject(key);
+                                key= ToolUtils.getKeyFromJson(subJson);
+                                sb.append(" -el ").append(key).append(" ").append(subJson.getString(key));
+                            } else if (key.contains("longTime")) {
+                                sb.append(" -el ").append(jsonObject.getString("longTime")).append(" ").append(System.currentTimeMillis());
+                            } else {
+                                try {
+                                    JSONObject subJson = jsonObject.getJSONObject(key);
+                                    key = ToolUtils.getKeyFromJson(subJson);
+                                    sb.append(" -es ").append(key).append(" ").append(subJson.getString(key));
+                                }catch (Exception e){
+                                    Log.e("tag", "errorKey: ");
+                                    sb.append(" -es ").append(key).append(" ").append(jsonObject.getString(key));
+                                }
+                            }
+                            Log.e("tag", "getData: "+sb.toString() );
+                        }
+                    }
+                }
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             //从通知栏点击进入的情况
             if(intent.hasExtra("pkgName")){
                 String pkgName=intent.getStringExtra("pkgName");
@@ -117,9 +206,10 @@ public class ItemActivity extends BaseActivity {
         }
         //编辑appInfo的情况
         if (id != -1) {
-            dbManager.updateAppInfo(new AppInfo(id, page, pos, pkgName, clsName, appName));
+            dbManager.updateAppInfo(new AppInfo(id, page, pos, pkgName, clsName, appName,null));
         } else {
-            dbManager.insertAppInfo(new AppInfo(pkgName, clsName, appName, page, pos));
+            String extra=proSb.append(sb.toString()).toString();
+            dbManager.insertAppInfo(new AppInfo(pkgName, clsName, appName, page, pos,extra));
             HashMap<String,String> map = new HashMap<>();
             map.put("pkgName",pkgName);
             map.put("clsName",clsName);

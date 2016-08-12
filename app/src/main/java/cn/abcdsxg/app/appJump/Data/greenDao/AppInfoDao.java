@@ -28,6 +28,7 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
         public final static Property PkgName = new Property(3, String.class, "pkgName", false, "pkgName");
         public final static Property ClsName = new Property(4, String.class, "clsName", false, "clsName");
         public final static Property AppName = new Property(5, String.class, "AppName", false, "AppName");
+        public final static Property Extra = new Property(6, String.class, "extra", false, "extra");
     };
 
 
@@ -48,7 +49,8 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
                 "\"pagePos\" INTEGER NOT NULL ," + // 2: pagePos
                 "\"pkgName\" TEXT," + // 3: pkgName
                 "\"clsName\" TEXT," + // 4: clsName
-                "\"AppName\" TEXT);"); // 5: AppName
+                "\"AppName\" TEXT," + // 5: AppName
+                "\"extra\" TEXT);"); // 6: extra
     }
 
     /** Drops the underlying database table. */
@@ -82,6 +84,11 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
         if (AppName != null) {
             stmt.bindString(6, AppName);
         }
+ 
+        String extra = entity.getExtra();
+        if (extra != null) {
+            stmt.bindString(7, extra);
+        }
     }
 
     @Override
@@ -109,6 +116,11 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
         if (AppName != null) {
             stmt.bindString(6, AppName);
         }
+ 
+        String extra = entity.getExtra();
+        if (extra != null) {
+            stmt.bindString(7, extra);
+        }
     }
 
     @Override
@@ -124,7 +136,8 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
             cursor.getInt(offset + 2), // pagePos
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // pkgName
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // clsName
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // AppName
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // AppName
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // extra
         );
         return entity;
     }
@@ -137,6 +150,7 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
         entity.setPkgName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setClsName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setAppName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setExtra(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override

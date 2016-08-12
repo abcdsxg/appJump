@@ -32,6 +32,8 @@ android {
         coolapk {}
         baidu{}
         yingyongbao{}
+        xposed{}
+        github{}
 
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
@@ -47,6 +49,7 @@ greendao{
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    provided fileTree(dir: 'lib_xposed', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
     compile 'com.android.support:recyclerview-v7:24.0.0'
@@ -56,6 +59,7 @@ dependencies {
     compile 'com.zhy:okhttputils:2.6.1'
     compile 'com.github.clans:fab:1.6.4'
     compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'com.google.code.gson:gson:2.7'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha2'
     testCompile 'junit:junit:4.12'

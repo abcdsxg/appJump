@@ -34,7 +34,7 @@ public class ShortCutActivity extends AppCompatActivity {
             List<AppInfo> list=dbManager.queryAppInfo(id);
             if(list!=null && list.size()>0){
                 AppInfo appInfo=list.get(0);
-                SuUtils.startApp(this,appInfo.getPkgName(),appInfo.getClsName(),null);
+                SuUtils.startApp(this,appInfo.getPkgName(),appInfo.getClsName(),appInfo.getExtra());
                 finish();
                 System.exit(0);
             }

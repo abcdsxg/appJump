@@ -28,5 +28,6 @@ public class Constant {
     public final  static String  MAXTABNUM="MaxTabNum";
     public final  static String  ISFIRST="isFirst";
     public final  static String  SHOWCLSNAME="showClsName";
+    public final  static String  CUSTOME="custome";
 
 }

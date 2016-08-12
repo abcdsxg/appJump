@@ -78,7 +78,7 @@ public class GridViewFragment extends BaseFragment {
     @OnItemClick(R.id.gridViewApp)
     void onClickItem(int pos){
         AppInfo appInfo=appInfos.get(pos);
-        SuUtils.startApp(mApplication,appInfo.getPkgName(),appInfo.getClsName(),null);
+        SuUtils.startApp(mApplication,appInfo.getPkgName(),appInfo.getClsName(),appInfo.getExtra());
     }
 
     @OnItemLongClick(R.id.gridViewApp)

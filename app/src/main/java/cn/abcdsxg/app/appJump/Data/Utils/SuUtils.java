@@ -171,12 +171,12 @@ public class SuUtils {
     }
     //正则表达式获取正在前台界面的类名和包名
     private static AppInfo patternValue(String value) {
-        String patternString="mFocusedActivity: ActivityRecord\\{([\\s\\S]*) ([\\s\\S]*)/.([\\s\\S]*) ([\\s\\S]*)";
+        String patternString="mFocusedActivity: ActivityRecord\\{([\\s\\S]*) ([\\s\\S]*)/([\\s\\S]*) ([\\s\\S]*)";
         Pattern pattern=Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(value);
         if(matcher.find()){
             String pkgName=matcher.group(2);
-            String clsName=pkgName+"."+matcher.group(3);
+            String clsName=matcher.group(3);
             AppInfo appInfo=new AppInfo(pkgName,clsName);
             return appInfo;
         }else{

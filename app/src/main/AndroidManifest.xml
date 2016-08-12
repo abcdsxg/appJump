@@ -18,6 +18,17 @@
         android:name=".Base.BaseApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+        <!-- xposed模块声明 -->
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="HookIntent" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="54" />
+
         <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +48,7 @@
             android:name=".Activity.ShortCutActivity">
             <!-- 必须加上这个，否则无法直接使用自定的action -->
             <intent-filter>
-                <action android:name="android.intent.action.SHOW_APP_INFO" />
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

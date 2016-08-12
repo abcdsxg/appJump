@@ -80,17 +80,19 @@ public class GetAppInfoService extends Service {
     }
 
     private void runAppInfoTask() {
-        AppInfo info;
+        AppInfo info = null;
         //android5.0之后限制了获取最近任务栈，这里根据版本分情况获取
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.LOLLIPOP) {
             info=getAppInfo();
-        }else{
+        }
+        if(info==null){
+            //如果未获取到就用命令获取，同时也是5.0以后的获取方式
             info = SuUtils.getAppInfo();
         }
         if(info==null){
             //获取AppInfo失败
             breakTask=true;
-            Toast.makeText(this,"获取失败",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getBaseContext(),"获取失败",Toast.LENGTH_SHORT).show();
         }else{
             //更新通知栏
             notifyFlush(info);
@@ -98,6 +100,7 @@ public class GetAppInfoService extends Service {
         //每秒获取一次
         Timer timer=new Timer();
         int flushTime=SpUtil.getIntSp(this, Constant.FLUSHTIME);
+        if(flushTime<0){    flushTime=1000;    }
         timer.schedule(new TimerTask() {
             @Override
             public void run() {

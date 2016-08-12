@@ -84,12 +84,12 @@ public class MainActivity extends BaseActivity {
     private void initDB() {
         DBManager dbManager=DBManager.getInstance();
         List<AppInfo> appInfos=new ArrayList<>();
-        appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_MONEY,"转账",0,1));
-        appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_MONEY_CODE,"付款码",0,2));
-        appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_SCAN,"扫一扫",0,1));
-        appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_MONEY_CODE,"收付款",0,2));
-        appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_MONEY,"转账",0,3));
-        appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_SCAN,"扫一扫",0,1));
+        appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_MONEY,"转账",0,1,null));
+        appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_MONEY_CODE,"付款码",0,2,null));
+        appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_SCAN,"扫一扫",0,3,null));
+        appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_MONEY,"转账",0,4,null));
+        appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_MONEY_CODE,"收付款",0,5,null));
+        appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_SCAN,"扫一扫",0,6,null));
 //        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_QIANBAO,"QQ钱包",1,null));
 //        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_SCAN,"QQ扫一扫",1,null));
 //        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_SHUOSHUO,"QQ发说说",1,null));
