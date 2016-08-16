@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.util.Iterator;
 
+import cn.abcdsxg.app.appJump.Activity.ShortCutActivity;
 import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
 
 /**
@@ -100,23 +101,33 @@ public class ToolUtils {
     }
 
     //创建桌面快捷方式
-    public static void getShortcutToDesktopIntent(Context context, AppInfo appInfo) {
-        Intent intent = new Intent(Intent.ACTION_SHOW_APP_INFO);
+    public static void sendShortcut(Activity myActivity, AppInfo appInfo,boolean isDesktop) {
+        Intent intent = new Intent(myActivity, ShortCutActivity.class);
         intent.putExtra("id",appInfo.getId());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        Intent shortcut = new Intent(Intent.ACTION_CREATE_SHORTCUT);
         // 不允许重建
         shortcut.putExtra("duplicate", false);
         // 设置名字
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME,appInfo.getAppName());
         // 设置图标
-        Drawable drawableIcon=getAppIcon(context,appInfo.getPkgName());
+        Drawable drawableIcon=getAppIcon(myActivity,appInfo.getPkgName());
 
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON,
                 drawableToBitamp(drawableIcon));
         // 设置意图和快捷方式关联程序
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT,intent);
-        context.sendBroadcast(shortcut);
+        //判断是在桌面创建还是传值给添加快捷方式的app
+        if(isDesktop) {
+            myActivity.sendBroadcast(shortcut);
+        }else{
+            myActivity.setResult(Activity.RESULT_OK,shortcut);
+            if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){
+                myActivity.finishAndRemoveTask();
+            }else{
+                myActivity.finish();
+            }
+        }
 
     }
 

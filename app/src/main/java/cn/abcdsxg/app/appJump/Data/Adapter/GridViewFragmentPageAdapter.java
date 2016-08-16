@@ -24,15 +24,18 @@ public class GridViewFragmentPageAdapter extends FragmentStatePagerAdapter {
     Context context;
     List<String> tagList=new ArrayList<>();
     FragmentManager fm;
-    public GridViewFragmentPageAdapter(FragmentManager fm, Context context) {
+    boolean isDesktop;
+
+    public GridViewFragmentPageAdapter(FragmentManager fm, Context context,boolean isDesktop) {
         super(fm);
         this.fm=fm;
         this.context=context;
+        this.isDesktop=isDesktop;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return GridViewFragment.newInstant(position);
+        return GridViewFragment.newInstant(position,isDesktop);
     }
 
     @Override

@@ -53,7 +53,7 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fragmentPagerAdapter = new GridViewFragmentPageAdapter(getFragmentManager(), mApplication);
+        fragmentPagerAdapter = new GridViewFragmentPageAdapter(getFragmentManager(), mApplication,true);
     }
 
     @Override
