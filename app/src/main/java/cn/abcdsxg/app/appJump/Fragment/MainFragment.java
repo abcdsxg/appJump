@@ -79,11 +79,11 @@ public class MainFragment extends BaseFragment {
                 addNewAppInfo();
                 break;
             case R.id.fabNewTab:
-                showDialog("添加新标签页",ADDNEWTAB);
+                showDialog(getString(R.string.addNewTab),ADDNEWTAB);
                 break;
 
             case R.id.fabEditTab:
-                showDialog("编辑标签名",EDITTAB);
+                showDialog(getString(R.string.editTab),EDITTAB);
                 break;
         }
         menu.toggle(true);
@@ -106,13 +106,13 @@ public class MainFragment extends BaseFragment {
         AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle(tilte)
                 .setView(dialogView)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                         String text = editText.getText().toString();
                         if (TextUtils.isEmpty(text)) {
-                            showToast("内容不能为空！");
+                            showToast(getString(R.string.cannotEmpty));
                         } else {
                             if(flag==ADDNEWTAB) {
                                 //添加新tab页并保存tab数
@@ -128,7 +128,7 @@ public class MainFragment extends BaseFragment {
                         }
                     }
                 })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();

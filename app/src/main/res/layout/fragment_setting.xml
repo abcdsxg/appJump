@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="通知栏设置"
+        android:text="@string/notifySetting"
         android:layout_margin="5dp"
         android:textSize="18sp"/>
     <View
@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="状态栏显示图标"
+            android:text="@string/showIcon"
             android:layout_centerVertical="true"
             android:textColor="@color/primary_text"
             android:textSize="16sp"/>
@@ -53,7 +53,7 @@
         <TextView
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="开启通知栏检测(可在添加自定义时开启，关闭则减少卡顿)"
+            android:text="@string/openShowClsName"
             android:layout_centerVertical="true"
             android:textColor="@color/primary_text"
             android:textSize="16sp"/>
@@ -76,9 +76,9 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="通知栏类名刷新时间间隔"
+            android:text="@string/flushTime"
             android:layout_centerVertical="true"
             android:textColor="@color/primary_text"
             android:textSize="16sp"/>
@@ -110,7 +110,7 @@
         android:background="#fff"
         android:textColor="@color/red500"
         android:textSize="20sp"
-        android:text="保存设置"/>
+        android:text="@string/saveSetting"/>
 
 
 </LinearLayout>

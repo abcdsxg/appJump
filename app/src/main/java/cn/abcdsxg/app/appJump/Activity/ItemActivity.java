@@ -100,7 +100,7 @@ public class ItemActivity extends BaseActivity {
             editPos.setText(String.valueOf(appInfo.getPagePos()));
             //由于page页数从0开始的，需要做下处理
             editPage.setText(String.valueOf(appInfo.getPage() + 1));
-            titleBar.setText("编辑当前AppInfo");
+            titleBar.setText(R.string.editAppInfo);
         } else {
             //首先判断是否有传值
             try {
@@ -205,7 +205,7 @@ public class ItemActivity extends BaseActivity {
                 });
             }
             btnDelete.setVisibility(View.GONE);
-            titleBar.setText("自定义AppInfo");
+            titleBar.setText(R.string.customAppInfo);
         }
     }
 
@@ -219,17 +219,17 @@ public class ItemActivity extends BaseActivity {
             page = Integer.valueOf(editPage.getText().toString());
             pos = Integer.valueOf(editPos.getText().toString());
         } catch (Exception e) {
-            showToast("最后两行输入的格式有误");
+            showToast(getString(R.string.inputError));
             return;
         }
         if (TextUtils.isEmpty(pkgName) || TextUtils.isEmpty(pkgName)
                 || TextUtils.isEmpty(appName) || pos == 0) {
-            showToast("有内容未输入，请检查！");
+            showToast(getString(R.string.emptyError));
             return;
         }
 
         if (page > MaxTabNum) {
-            showToast("填写的标签页数不能大于当前总Tab数！");
+            showToast(getString(R.string.numberError));
             return;
         } else {
             //由于page页数从0开始的，用户输入的最终page页需要减去1
@@ -259,8 +259,8 @@ public class ItemActivity extends BaseActivity {
     private void showDialog() {
         //弹出带编辑框的对话框
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("确定删除？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.deleteDia_title)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -268,7 +268,7 @@ public class ItemActivity extends BaseActivity {
                         finish();
                     }
                 })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();

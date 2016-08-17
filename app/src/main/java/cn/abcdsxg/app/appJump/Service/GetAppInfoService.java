@@ -66,8 +66,8 @@ public class GetAppInfoService extends Service {
                 .setOngoing(true)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setPriority(showIcon?NotificationCompat.PRIORITY_MAX:NotificationCompat.PRIORITY_MIN)
-                .setContentTitle("点击新建自定义页面")
-                .setContentText("当前页面:"+info.getClsName())
+                .setContentTitle(getString(R.string.notif_title))
+                .setContentText(getString(R.string.notif_content)+info.getClsName())
                 .setContentIntent(pendingIntent)
                 .build();
         nf.notify(0,notification);
@@ -93,7 +93,7 @@ public class GetAppInfoService extends Service {
         if(info==null){
             //获取AppInfo失败
             breakTask=true;
-            Toast.makeText(getBaseContext(),"获取失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), R.string.getError,Toast.LENGTH_SHORT).show();
         }else{
             //更新通知栏
             notifyFlush(info);

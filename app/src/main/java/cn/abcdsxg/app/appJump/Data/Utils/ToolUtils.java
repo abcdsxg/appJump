@@ -23,6 +23,7 @@ import java.util.Iterator;
 
 import cn.abcdsxg.app.appJump.Activity.ShortCutActivity;
 import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
+import cn.abcdsxg.app.appJump.R;
 
 /**
  * Author : 时小光
@@ -82,9 +83,9 @@ public class ToolUtils {
             if (!activity.shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)
                     ||!activity.shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity)
-                        .setTitle("请求权限")
-                        .setMessage("请您允许弹出的权限请求，否则应用将无法正常工作")
-                        .setPositiveButton("确定",
+                        .setTitle(R.string.permisDia_title)
+                        .setMessage(R.string.permisDia_msg)
+                        .setPositiveButton(R.string.yes,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int whichButton) {
                                         dialog.dismiss();
@@ -121,7 +122,7 @@ public class ToolUtils {
         //判断是在桌面创建还是传值给添加快捷方式的app
         if(isDesktop) {
             myActivity.sendBroadcast(shortcut);
-            Toast.makeText(myActivity,"快捷方式创建成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(myActivity, R.string.createSucceed,Toast.LENGTH_SHORT).show();
         }else{
             myActivity.setResult(Activity.RESULT_OK,shortcut);
             if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){

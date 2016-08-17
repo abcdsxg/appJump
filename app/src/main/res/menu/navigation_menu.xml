@@ -30,5 +30,5 @@
     <item
         android:id="@+id/action_exit"
         android:icon="@mipmap/exit"
-        android:title="退出"/>
+        android:title="@string/exit"/>
 </menu>

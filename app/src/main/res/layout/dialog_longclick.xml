@@ -7,14 +7,14 @@
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="编辑"
+        android:text="@string/edit"
         style="@style/longClickText"/>
 
     <TextView
         android:id="@+id/creatShortCut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="创建快捷方式"
+        android:text="@string/createShortcut"
         style="@style/longClickText"/>
 
 </LinearLayout>

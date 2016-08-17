@@ -37,20 +37,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/fab_add"
-        fab:fab_label="添加自定义" />
+        fab:fab_label="@string/addCustom" />
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fabNewTab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_about"
-        fab:fab_label="添加标签页"/>
+        fab:fab_label="@string/addNewTab"/>
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fabEditTab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_about"
-        fab:fab_label="编辑标签名"/>
+        fab:fab_label="@string/editTab"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 

@@ -67,9 +67,9 @@ public class SettingFragment extends BaseFragment {
                 Intent intent=new Intent(mApplication, GetAppInfoService.class);
                 mApplication.startService(intent);
             }
-            showToast("设置保存成功");
+            showToast(getString(R.string.settingSaveSucceed));
         } catch (Exception e) {
-            showToast("输入格式错误,保存失败");
+            showToast(getString(R.string.settingSaveFail));
         }
     }
 

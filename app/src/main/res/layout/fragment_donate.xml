@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:gravity="center"
-        android:text="点击以下捐赠方式可复制"
+        android:text="@string/clickToCopyDonate"
         android:textColor="@color/colorPrimary"
         android:textSize="25dp"/>
     <LinearLayout
