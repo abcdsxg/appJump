@@ -51,9 +51,9 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="通知栏显示当前页面类名"
+            android:text="开启通知栏检测(可在添加自定义时开启，关闭则减少卡顿)"
             android:layout_centerVertical="true"
             android:textColor="@color/primary_text"
             android:textSize="16sp"/>

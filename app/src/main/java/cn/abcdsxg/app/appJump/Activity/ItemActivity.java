@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -73,6 +75,7 @@ public class ItemActivity extends BaseActivity {
     private StringBuilder sb=new StringBuilder();
     private StringBuilder jsonSb;
     private StringBuilder proSb=new StringBuilder();
+    private int MaxTabNum;
     @Override
     public int getViewId() {
         return R.layout.activity_item;
@@ -120,7 +123,10 @@ public class ItemActivity extends BaseActivity {
                         while (it.hasNext()) {
                             String key = it.next().toString();
                             Log.e("tag", "key: "+key );
-                            if (key.contains("type")) {
+                            //过滤用于判断包名的key
+                            if(key.equals("pkgName")){
+
+                            }else if (key.contains("type")) {
                                 proSb.append(" -t ").append(jsonObject.getString(key));
                             } else if (key.contains("data")) {
                                 proSb.append(" -d ").append(jsonObject.getString(key));
@@ -166,12 +172,37 @@ public class ItemActivity extends BaseActivity {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
+            MaxTabNum = SpUtil.getIntSp(this, "MaxTabNum");
             //从通知栏点击进入的情况
             if(intent.hasExtra("pkgName")){
                 String pkgName=intent.getStringExtra("pkgName");
-                String clsName=intent.getStringExtra("clsName");
+                final String clsName=intent.getStringExtra("clsName");
                 editAppPkgName.setText(pkgName);
                 editAppClsName.setText(clsName);
+                editPage.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        try{
+                            int page=Integer.valueOf(charSequence.toString());
+                            if (--page <= MaxTabNum) {
+                                int pos=DBManager.getInstance().queryAppInfoListByPage(page).size()+1;
+                                editPos.setText(String.valueOf(pos));
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
             }
             btnDelete.setVisibility(View.GONE);
             titleBar.setText("自定义AppInfo");
@@ -196,7 +227,7 @@ public class ItemActivity extends BaseActivity {
             showToast("有内容未输入，请检查！");
             return;
         }
-        int MaxTabNum = SpUtil.getIntSp(this, "MaxTabNum");
+
         if (page > MaxTabNum) {
             showToast("填写的标签页数不能大于当前总Tab数！");
             return;

@@ -24,7 +24,7 @@
             android:value="true" />
         <meta-data
             android:name="xposeddescription"
-            android:value="HookIntent" />
+            android:value="可自定义一键跳转指定应用的任意页面" />
         <meta-data
             android:name="xposedminversion"
             android:value="54" />

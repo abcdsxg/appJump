@@ -15,6 +15,7 @@ import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -105,7 +106,7 @@ public class ToolUtils {
         Intent intent = new Intent(myActivity, ShortCutActivity.class);
         intent.putExtra("id",appInfo.getId());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Intent shortcut = new Intent(Intent.ACTION_CREATE_SHORTCUT);
+        Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
         // 不允许重建
         shortcut.putExtra("duplicate", false);
         // 设置名字
@@ -120,6 +121,7 @@ public class ToolUtils {
         //判断是在桌面创建还是传值给添加快捷方式的app
         if(isDesktop) {
             myActivity.sendBroadcast(shortcut);
+            Toast.makeText(myActivity,"快捷方式创建成功",Toast.LENGTH_SHORT).show();
         }else{
             myActivity.setResult(Activity.RESULT_OK,shortcut);
             if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP){

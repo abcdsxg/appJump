@@ -90,11 +90,6 @@ public class MainActivity extends BaseActivity {
         appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_MONEY,"转账",0,4,null));
         appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_MONEY_CODE,"收付款",0,5,null));
         appInfos.add(new AppInfo(Constant.PACKAGE_WX,Constant.WX_SCAN,"扫一扫",0,6,null));
-//        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_QIANBAO,"QQ钱包",1,null));
-//        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_SCAN,"QQ扫一扫",1,null));
-//        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_SHUOSHUO,"QQ发说说",1,null));
-//        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_ZONE,"QQ看空间",1,null));
-//        appInfos.add(new AppInfo(Constant.PACKAGE_QQ,Constant.QQ_LIMIXIU,"QQ厘米秀",1,null));
         dbManager.insertAppInfoList(appInfos);
         SpUtil.saveSp(this,Constant.MAXTABNUM,1);
         SpUtil.saveSp(this,"0","支付/扫码");

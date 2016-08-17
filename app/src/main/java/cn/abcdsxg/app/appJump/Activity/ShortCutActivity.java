@@ -3,11 +3,13 @@ package cn.abcdsxg.app.appJump.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TableLayout;
 
@@ -34,9 +36,11 @@ public class ShortCutActivity extends AppCompatActivity {
         Intent intent=getIntent();
         if(Intent.ACTION_CREATE_SHORTCUT.equals(intent.getAction())){
             setContentView(R.layout.activity_shortcut);
+            Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
             TabLayout tabLayout=(TabLayout)findViewById(R.id.tabLayout);
             ViewPager viewPager=(ViewPager)findViewById(R.id.viewpager);
             GridViewFragmentPageAdapter fragmentPagerAdapter = new GridViewFragmentPageAdapter(getSupportFragmentManager(),ShortCutActivity.this,false);
+            toolbar.setTitle("创建快捷方式");
             viewPager.setAdapter(fragmentPagerAdapter);
             tabLayout.setupWithViewPager(viewPager);
             tabLayout.setTabMode(TabLayout.MODE_FIXED);

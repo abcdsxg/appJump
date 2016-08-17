@@ -57,7 +57,8 @@ public class GetAppInfoService extends Service {
 //        }
         //获取是否显示状态栏图标
         boolean showIcon= SpUtil.getBooleanSp(this, Constant.SHOWICON);
-        boolean showClsName= SpUtil.getBooleanSp(this, Constant.SHOWCLSNAME);
+        //这里设置通知栏检测，逻辑取反
+        breakTask= !SpUtil.getBooleanSp(this, Constant.SHOWCLSNAME);
         //设置notification并通知
         NotificationManager nf=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Notification notification=new NotificationCompat.Builder(getApplicationContext())
@@ -66,7 +67,7 @@ public class GetAppInfoService extends Service {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setPriority(showIcon?NotificationCompat.PRIORITY_MAX:NotificationCompat.PRIORITY_MIN)
                 .setContentTitle("点击新建自定义页面")
-                .setContentText(showClsName?"当前页面:"+info.getClsName():"")
+                .setContentText("当前页面:"+info.getClsName())
                 .setContentIntent(pendingIntent)
                 .build();
         nf.notify(0,notification);
@@ -92,7 +93,7 @@ public class GetAppInfoService extends Service {
         if(info==null){
             //获取AppInfo失败
             breakTask=true;
-//            Toast.makeText(getBaseContext(),"获取失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(),"获取失败",Toast.LENGTH_SHORT).show();
         }else{
             //更新通知栏
             notifyFlush(info);
