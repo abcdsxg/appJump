@@ -91,6 +91,7 @@ public class ItemActivity extends BaseActivity {
         dbManager = DBManager.getInstance();
         Intent intent = getIntent();
         id = intent.getLongExtra("id", -1);
+        MaxTabNum = SpUtil.getIntSp(this, "MaxTabNum");
         if (id != -1) {
             //编辑appInfo的情况
             AppInfo appInfo = dbManager.queryAppInfo(id).get(0);
@@ -172,7 +173,7 @@ public class ItemActivity extends BaseActivity {
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-            MaxTabNum = SpUtil.getIntSp(this, "MaxTabNum");
+
             //从通知栏点击进入的情况
             if(intent.hasExtra("pkgName")){
                 String pkgName=intent.getStringExtra("pkgName");
@@ -228,7 +229,7 @@ public class ItemActivity extends BaseActivity {
             return;
         }
 
-        if (page > MaxTabNum) {
+        if (page > MaxTabNum || page < 0) {
             showToast(getString(R.string.numberError));
             return;
         } else {
