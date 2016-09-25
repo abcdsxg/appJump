@@ -68,4 +68,6 @@
     <string name="showPage">where the page num do you want to add:</string>
     <string name="delete">delete</string>
     <string name="exit">Exit</string>
+    <string name="DoesnotExitError">The application does not exist and can not be started.</string>
+    <string name="createShoreCutTitle">Create Shortcut</string>
 </resources>

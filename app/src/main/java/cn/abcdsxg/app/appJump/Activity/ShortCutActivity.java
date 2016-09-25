@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class ShortCutActivity extends AppCompatActivity {
             TabLayout tabLayout=(TabLayout)findViewById(R.id.tabLayout);
             ViewPager viewPager=(ViewPager)findViewById(R.id.viewpager);
             GridViewFragmentPageAdapter fragmentPagerAdapter = new GridViewFragmentPageAdapter(getSupportFragmentManager(),ShortCutActivity.this,false);
-            toolbar.setTitle("创建快捷方式");
+            toolbar.setTitle(R.string.createShoreCutTitle);
             viewPager.setAdapter(fragmentPagerAdapter);
             tabLayout.setupWithViewPager(viewPager);
             tabLayout.setTabMode(TabLayout.MODE_FIXED);
@@ -51,7 +52,12 @@ public class ShortCutActivity extends AppCompatActivity {
             List<AppInfo> list=dbManager.queryAppInfo(id);
             if(list!=null && list.size()>0){
                 AppInfo appInfo=list.get(0);
-                SuUtils.startApp(this,appInfo.getPkgName(),appInfo.getClsName(),appInfo.getExtra());
+                try {
+                    SuUtils.startApp(this,appInfo.getPkgName(),appInfo.getClsName(),appInfo.getExtra());
+                } catch (Exception e) {
+                    Toast.makeText(this,getString(R.string.DoesnotExitError),Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
                 finish();
                 System.exit(0);
             }

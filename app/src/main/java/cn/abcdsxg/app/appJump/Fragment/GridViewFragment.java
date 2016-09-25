@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import butterknife.BindView;
@@ -86,7 +87,11 @@ public class GridViewFragment extends BaseFragment {
             ToolUtils.sendShortcut(getActivity(),appInfo,false);
         }else {
             AppInfo appInfo = appInfos.get(pos);
-            SuUtils.startApp(mApplication, appInfo.getPkgName(), appInfo.getClsName(), appInfo.getExtra());
+            try {
+                SuUtils.startApp(mApplication, appInfo.getPkgName(), appInfo.getClsName(), appInfo.getExtra());
+            } catch (Exception e) {
+                showToast(getString(R.string.DoesnotExitError));
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package cn.abcdsxg.app.appJump.xposed;
+package cn.abcdsxg.app.appJump;
 
 import android.app.Activity;
 import android.app.AndroidAppHelper;
@@ -45,9 +45,7 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class XposedMain implements IXposedHookLoadPackage{
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        //系统 app 不监控
-        if ((lpparam.appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
-            return;
+
 
         //hook 启动 activity android.app.Activity#startActivityForResult
         findAndHookMethod("android.app.Activity", lpparam.classLoader, "startActivityForResult", Intent.class, int.class, Bundle.class, new XC_MethodHook() {
@@ -129,11 +127,11 @@ public class XposedMain implements IXposedHookLoadPackage{
             }
         }
         String json=intentGson.toJson(intentMap);
+        Log.e("tag", "getIntentAndBundle: "+json );
         OutputStream out=null;
         try {
-            Context context = AndroidAppHelper.currentApplication().getApplicationContext();
             File file=new File(Environment.getExternalStorageDirectory()+"/temp.json");
-            file.createNewFile();
+            if(!file.exists())  {   file.createNewFile();   }
             out=new FileOutputStream(file);
             out.write(json.getBytes());
         }catch (Exception e){

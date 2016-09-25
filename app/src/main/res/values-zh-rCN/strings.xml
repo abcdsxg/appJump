@@ -68,4 +68,6 @@
     <string name="showPage">显示在第几个标签页:</string>
     <string name="delete">删 除</string>
     <string name="exit">退出</string>
+    <string name="DoesnotExitError">该应用不存在，无法启动</string>
+    <string name="createShoreCutTitle">创建快捷方式</string>
 </resources>

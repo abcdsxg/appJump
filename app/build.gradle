@@ -8,8 +8,8 @@ android {
         applicationId "cn.abcdsxg.app.appJump"
         minSdkVersion 14
         targetSdkVersion 24
-        versionCode 5
-        versionName "1.4"
+        versionCode 9
+        versionName "1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -50,9 +50,9 @@ greendao{
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided fileTree(dir: 'lib_xposed', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support:design:24.0.0'
-    compile 'com.android.support:recyclerview-v7:24.0.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
+    compile 'com.android.support:recyclerview-v7:24.2.0'
     compile 'com.jakewharton:butterknife:8.2.1'
     compile 'org.greenrobot:greendao:3.0.1'
     compile 'com.umeng.analytics:analytics:latest.integration'
@@ -65,5 +65,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support:support-annotations:24.0.0'
+    androidTestCompile 'com.android.support:support-annotations:24.2.0'
 }

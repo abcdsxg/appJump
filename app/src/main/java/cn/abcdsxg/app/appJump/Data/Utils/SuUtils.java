@@ -53,7 +53,7 @@ public class SuUtils {
     }
 
     //执行启动指定app的命令并返回结果
-    public static boolean startApp(Context context,String packageName, String className, String extra){
+    public static boolean startApp(Context context,String packageName, String className, String extra) throws Exception{
         //检查应用是否停用，并启用已停用的应用
         PackageManager pm=context.getPackageManager();
         int statue=pm.getApplicationEnabledSetting(packageName);
