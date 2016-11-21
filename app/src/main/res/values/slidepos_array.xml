@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_preference">
+        <item>左上角</item>
+        <item>右上角</item>
+        <item>左下角</item>
+        <item>右下角</item>
+    </string-array>
+</resources>
