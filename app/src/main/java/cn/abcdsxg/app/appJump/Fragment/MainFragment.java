@@ -32,7 +32,6 @@ import cn.abcdsxg.app.appJump.R;
  */
 public class MainFragment extends BaseFragment {
 
-
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
     @BindView(R.id.viewpager)

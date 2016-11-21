@@ -57,7 +57,8 @@
     <string name="addCustom">Add Custom</string>
     <string name="notifySetting">Notification settings</string>
     <string name="showIcon">Show status bar icons</string>
-    <string name="openShowClsName">Open the notification bar detection (you must open when add a custom and close can reduction Caton)</string>
+    <string name="openShowClsName">Open the notification bar detection</string>
+    <string name="openShwoClsNameSummay">(you must open when add a custom and close can reduction Caton)</string>
     <string name="flushTime">Notification detection of the refresh interval</string>
     <string name="saveSetting">Save Setting</string>
     <string name="finish">Commit</string>

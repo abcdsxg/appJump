@@ -25,6 +25,14 @@ public class Constant {
     public final  static String  MAXTABNUM="MaxTabNum";
     public final  static String  ISFIRST="isFirst";
     public final  static String  SHOWCLSNAME="showClsName";
-    public final  static String  CUSTOME="custome";
+    public static final String   PANELCOUNT="panelCount";
+    public static final String   PANEL="panel";
+    public static final String   ADD_PANEL="addPanel";
+    public static final String   EDIT_PANEL="editPanel";
+    public static final String   SLIDEPOS="slidePos";
+    public static final String   MINDISTANT="minDistant";
+    public static final String   SHOCK="shock";
+    public static final String   UMENG_CHANNEL="UMENG_CHANNEL";
+
 
 }

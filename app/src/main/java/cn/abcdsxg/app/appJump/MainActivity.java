@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import butterknife.BindView;
+import cn.abcdsxg.app.appJump.Activity.PreferenceSettingActivity;
 import cn.abcdsxg.app.appJump.Base.BaseActivity;
 import cn.abcdsxg.app.appJump.Data.Constant;
 import cn.abcdsxg.app.appJump.Data.Utils.SpUtil;
@@ -32,8 +33,8 @@ import cn.abcdsxg.app.appJump.Data.greenDao.DBManager;
 import cn.abcdsxg.app.appJump.Fragment.DonateFragment;
 import cn.abcdsxg.app.appJump.Fragment.HelpFragment;
 import cn.abcdsxg.app.appJump.Fragment.MainFragment;
-import cn.abcdsxg.app.appJump.Fragment.SettingFragment;
 import cn.abcdsxg.app.appJump.Service.GetAppInfoService;
+import cn.abcdsxg.app.appJump.Service.TouchService;
 
 public class MainActivity extends BaseActivity {
 
@@ -71,13 +72,22 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initData() {
-        if(SpUtil.getIntSp(this,Constant.ISFIRST)==-1){
+        int isFirst=SpUtil.getIntSp(this,Constant.ISFIRST);
+        if(isFirst==-1){
             if(SuUtils.isRoot()) {
                 initDB();
-                SpUtil.saveSp(this, Constant.ISFIRST, 1);
+                SpUtil.saveSp(MainActivity.this, Constant.ISFIRST, 1);
             }else{
                 showToast(getString(R.string.rootTip));
+
             }
+        } else if(isFirst==1){
+            SpUtil.saveSp(this, Constant.FLUSHTIME, "1000");
+            SpUtil.saveSp(this, Constant.PANEL, "1");
+            SpUtil.saveSp(this, Constant.SHOCK, true);
+            SpUtil.saveSp(this, Constant.SLIDEPOS, "1");
+            //新增配置，为了兼容之前的版本
+            SpUtil.saveSp(MainActivity.this, Constant.ISFIRST, 2);
         }
     }
 
@@ -93,9 +103,12 @@ public class MainActivity extends BaseActivity {
         dbManager.insertAppInfoList(appInfos);
         SpUtil.saveSp(this,Constant.MAXTABNUM,1);
         SpUtil.saveSp(this,"0",getString(R.string.tabTitle));
-        SpUtil.saveSp(this, Constant.FLUSHTIME, 1000);
+        SpUtil.saveSp(this, Constant.FLUSHTIME, "1000");
         SpUtil.saveSp(this, Constant.SHOWCLSNAME, true);
         SpUtil.saveSp(this, Constant.SHOWICON, false);
+        SpUtil.saveSp(this, Constant.PANEL, "1");
+        SpUtil.saveSp(this, Constant.SHOCK, true);
+        SpUtil.saveSp(this, Constant.SLIDEPOS, "1");
     }
 
     private void initService() {
@@ -107,7 +120,8 @@ public class MainActivity extends BaseActivity {
                 startService(intent);
             }
         },2000);
-
+        Intent intent = new Intent(MainActivity.this, TouchService.class);
+        startService(intent);
     }
 
     private void initView() {
@@ -134,7 +148,7 @@ public class MainActivity extends BaseActivity {
     private void setupDrawerContent() {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 item.setCheckable(true);
                 int id = item.getItemId();
                 switch (id) {
@@ -150,9 +164,8 @@ public class MainActivity extends BaseActivity {
                         MobclickAgent.onEvent(MainActivity.this, "Donate");
                         break;
                     case R.id.action_settings:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.main_content, new SettingFragment()).commit();
-                        mTitle = getString(R.string.Settings);
+                        Intent settingIntent=new Intent(MainActivity.this, PreferenceSettingActivity.class);
+                        startActivity(settingIntent);
                         MobclickAgent.onEvent(MainActivity.this, "Settings");
                         break;
                     case R.id.action_help:
@@ -166,7 +179,11 @@ public class MainActivity extends BaseActivity {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse("market://details?id=" +
                                 getPackageName()));
-                        startActivity(intent);
+                        try {
+                            startActivity(intent);
+                        }catch (Exception ignored){
+
+                        }
                         break;
                     case R.id.action_exit:
                         stopService(new Intent(MainActivity.this,GetAppInfoService.class));

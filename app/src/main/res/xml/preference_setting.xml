@@ -1,30 +1,56 @@
-PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-<PreferenceCategory android:title="First    Category">
-    <ListPreference
-        android:key="list_key"
-        android:defaultValue="list key default value"
-        android:title="list title"
-        android:summary="list_summary"
-        android:entries="@array/list_preference"
-        android:entryValues="@array/list_preference"
-        android:dialogTitle="list_dialog_title" />
-</PreferenceCategory>
-<PreferenceCategory android:title="Second Category">
-<EditTextPreference
-    android:key="edittext_key"
-    android:defaultValue="edit default value"
-    android:summary="edit summary"
-    android:title="edit title" />
-<CheckBoxPreference
-    android:key="checkbox_key"
-    android:defaultValue="checkbox default value"
-    android:summary="checkbox summary"
-    android:title="checkbox title"
-    />
-<EditTextPreference
-    android:key="num_key"
-    android:defaultValue="0"
-    android:summary="edit summary"
-    android:numeric="integer"
-    android:title="input number" />
-</PreferenceCategory></PreferenceScreen>
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="滑动面板">
+        <ListPreference
+            android:key="panel"
+            android:defaultValue="1"
+            android:title="默认面板"
+            android:dialogTitle="选择面板" />
+        <Preference
+            android:key="editPanel"
+            android:title="编辑面板"/>
+        <Preference
+            android:key="addPanel"
+            android:title="添加面板"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="通知栏">
+        <CheckBoxPreference
+            android:key="showIcon"
+            android:defaultValue="false"
+            android:title="@string/showIcon"
+            />
+        <CheckBoxPreference
+            android:key="showClsName"
+            android:defaultValue="true"
+            android:summary="@string/openShwoClsNameSummay"
+            android:title="@string/openShowClsName"
+            />
+        <EditTextPreference
+            android:key="flushTime"
+            android:defaultValue="1000"
+            android:summary="默认1000ms检测一次"
+            android:numeric="integer"
+            android:title="@string/flushTime" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="其他">
+        <ListPreference
+            android:key="slidePos"
+            android:defaultValue="1"
+            android:title="滑动位置"
+            android:entries="@array/slidepos_key"
+            android:entryValues="@array/slidepos_value"
+            android:summary="默认从右上角"
+            android:dialogTitle="选择滑动位置" />
+        <EditTextPreference
+            android:key="minDistant"
+            android:defaultValue="20"
+            android:summary="可以设置5-80之间，默认是20"
+            android:numeric="integer"
+            android:title="滑动热点宽度" />
+        <CheckBoxPreference
+            android:key="shock"
+            android:defaultValue="true"
+            android:title="触及热点时震动"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

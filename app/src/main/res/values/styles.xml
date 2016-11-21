@@ -38,4 +38,8 @@
         <item name="android:textColor">@color/primary_text</item>
         <item name="android:padding">15dp</item>
     </style>
+
+    <style name="touchView_Fullscreen" parent="android:Theme.Wallpaper.NoTitleBar.Fullscreen">
+
+    </style>
 </resources>

@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -39,11 +41,11 @@
 
         <meta-data android:value="579f00bc67e58e688e00282c" android:name="UMENG_APPKEY"/>
         <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
-        <service android:name=".Service.GetAppInfoService">
-
-        </service>
+        <service android:name=".Service.GetAppInfoService"/>
+        <service android:name=".Service.TouchService" />
 
         <activity android:name=".Activity.ItemActivity"/>
+        <activity android:name=".Activity.EditPanelActivity" />
         <activity
             android:name=".Activity.ShortCutActivity">
             <!-- 必须加上这个，否则无法直接使用自定的action -->
@@ -52,6 +54,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.PreferenceSettingActivity"/>
     </application>
 
 </manifest>

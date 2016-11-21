@@ -8,9 +8,12 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 import android.widget.Toast;
 import java.util.List;
 import java.util.Timer;
@@ -31,6 +34,7 @@ import cn.abcdsxg.app.appJump.R;
 public class GetAppInfoService extends Service {
 
     private boolean breakTask;
+    private static Handler mHandler=new Handler();
     private AppInfo getAppInfo(){
         ActivityManager am= (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> runningTasks=am.getRunningTasks(1);
@@ -81,6 +85,12 @@ public class GetAppInfoService extends Service {
     }
 
     private void runAppInfoTask() {
+        //未开启检测直接结束服务
+        boolean showClsName= SpUtil.getBooleanSp(this, Constant.SHOWCLSNAME);
+        if(!showClsName){
+            stopSelf();
+            return;
+        }
         AppInfo info = null;
         //android5.0之后限制了获取最近任务栈，这里根据版本分情况获取
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.LOLLIPOP) {
@@ -93,19 +103,24 @@ public class GetAppInfoService extends Service {
         if(info==null){
             //获取AppInfo失败
             breakTask=true;
-            Toast.makeText(getBaseContext(), R.string.getError,Toast.LENGTH_SHORT).show();
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(GetAppInfoService.this, R.string.getError,Toast.LENGTH_SHORT).show();
+                }
+            });
         }else{
             //更新通知栏
             notifyFlush(info);
         }
         //每秒获取一次
         Timer timer=new Timer();
-        int flushTime=SpUtil.getIntSp(this, Constant.FLUSHTIME);
+        int flushTime= Integer.parseInt(SpUtil.getStringSp(this, Constant.FLUSHTIME));
         if(flushTime<0){    flushTime=1000;    }
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if(!breakTask) {
+                if(!breakTask && isScreenOn(GetAppInfoService.this)) {
                     runAppInfoTask();
                 }else {
                     NotificationManager nf=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -114,6 +129,17 @@ public class GetAppInfoService extends Service {
                 }
             }
         },flushTime);
+    }
+
+    public  boolean isScreenOn(Context c) {
+        PowerManager powermanager;
+        powermanager = (PowerManager) c.getSystemService(Context.POWER_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            Log.e("tag", "isScreenOn: "+powermanager.isInteractive() );
+            return powermanager.isInteractive();
+        }else{
+            return powermanager.isScreenOn();
+        }
     }
 
 

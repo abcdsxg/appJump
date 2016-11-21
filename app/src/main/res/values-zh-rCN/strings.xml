@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">应用页面跳转</string>
+    <string name="app_name">滑机启动器</string>
     <string name="Home">主界面</string>
     <string name="Donate">捐赠应用</string>
     <string name="Settings">应用设置</string>
@@ -44,7 +44,7 @@
     <string name="deleteDia_title">确定删除？</string>
     <string name="yes">确定</string>
     <string name="permisDia_title">请求权限</string>
-    <string name="permisDia_msg">请您允许弹出的权限请求，否则应用将无法正常工作</string>
+    <string name="permisDia_msg">请您允许弹出的权限请求(悬浮窗权限可能您需要手动开启)，否则应用将无法正常工作</string>
     <string name="createSucceed">快捷方式创建成功</string>
     <string name="addNewTab">添加新标签页</string>
     <string name="editTab">编辑标签名</string>
@@ -57,7 +57,8 @@
     <string name="addCustom">添加自定义</string>
     <string name="notifySetting">通知栏设置</string>
     <string name="showIcon">状态栏显示图标</string>
-    <string name="openShowClsName">开启通知栏检测(可在添加自定义时开启，关闭则减少卡顿)</string>
+    <string name="openShowClsName">开启通知栏检测</string>
+    <string name="openShwoClsNameSummay">(可在需要添加自定义时开启，关闭则减少卡顿)</string>
     <string name="flushTime">通知栏类名刷新时间间隔</string>
     <string name="saveSetting">保存设置</string>
     <string name="finish">完成</string>
