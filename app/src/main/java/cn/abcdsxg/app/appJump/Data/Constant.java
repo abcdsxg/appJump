@@ -33,6 +33,7 @@ public class Constant {
     public static final String   MINDISTANT="minDistant";
     public static final String   SHOCK="shock";
     public static final String   UMENG_CHANNEL="UMENG_CHANNEL";
+    public static final String   SHOWBOUND="showBound";
 
 
 }

@@ -1,6 +1,8 @@
 package cn.abcdsxg.app.appJump.Activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -10,6 +12,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 import cn.abcdsxg.app.appJump.Base.BaseActivity;
@@ -79,7 +82,6 @@ public class PreferenceSettingActivity extends BaseActivity {
             Preference editPanel=findPreference(Constant.EDIT_PANEL);
             addPanel.setOnPreferenceClickListener(this);
             editPanel.setOnPreferenceClickListener(this);
-
         }
 
         private void initList() {
@@ -117,7 +119,7 @@ public class PreferenceSettingActivity extends BaseActivity {
                         Intent intent = new Intent(context, GetAppInfoService.class);
                         context.startService(intent);
                     }
-                break;
+                    break;
                 case Constant.MINDISTANT:
                     int minDistant = 0;
                     try {
@@ -127,11 +129,31 @@ public class PreferenceSettingActivity extends BaseActivity {
                     }
                     if (minDistant < 5 || minDistant > 80) {
                         Toast.makeText(context, "范围错误，已设置为默认值20", Toast.LENGTH_SHORT).show();
-                        SpUtil.saveSp(context, Constant.MINDISTANT, 20);
+                        SpUtil.saveSp(context, Constant.MINDISTANT, "20");
+                    }else{
+                        SpUtil.saveSp(context, Constant.MINDISTANT, sharedPreferences.getString(key, "20"));
+                        context.startService(new Intent(context,TouchService.class));
                     }
-                break;
+                    break;
                 case Constant.SLIDEPOS:
                     context.startService(new Intent(context,TouchService.class));
+                    break;
+                case Constant.SHOWBOUND:
+                    Intent intent = new Intent(context, TouchService.class);
+                    if(sharedPreferences.getBoolean(key, false)) {
+                        AlertDialog dialog=new AlertDialog.Builder(getActivity())
+                                .setMessage("勾选后如果没有看到红色边界，请检查是否开启了悬浮窗权限")
+                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.dismiss();
+                                    }
+                                })
+                                .create();
+                        dialog.show();
+                        intent.putExtra(Constant.SHOWBOUND, 1);
+                    }
+                    context.startService(intent);
                     break;
             }
         }

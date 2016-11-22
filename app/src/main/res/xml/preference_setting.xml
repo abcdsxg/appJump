@@ -4,14 +4,14 @@
         <ListPreference
             android:key="panel"
             android:defaultValue="1"
-            android:title="默认面板"
+            android:title="默认滑机面板"
             android:dialogTitle="选择面板" />
         <Preference
             android:key="editPanel"
-            android:title="编辑面板"/>
+            android:title="编辑滑机面板"/>
         <Preference
             android:key="addPanel"
-            android:title="添加面板"/>
+            android:title="添加滑机面板"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="通知栏">
         <CheckBoxPreference
@@ -36,20 +36,26 @@
         <ListPreference
             android:key="slidePos"
             android:defaultValue="1"
-            android:title="滑动位置"
+            android:title="滑机位置"
             android:entries="@array/slidepos_key"
             android:entryValues="@array/slidepos_value"
             android:summary="默认从右上角"
-            android:dialogTitle="选择滑动位置" />
+            android:dialogTitle="选择滑机位置" />
         <EditTextPreference
             android:key="minDistant"
             android:defaultValue="20"
             android:summary="可以设置5-80之间，默认是20"
             android:numeric="integer"
-            android:title="滑动热点宽度" />
+            android:title="滑机热点宽度" />
+        <CheckBoxPreference
+            android:key="showBound"
+            android:defaultValue="false"
+            android:summary="默认边界为透明"
+            android:title="显示热点边界"/>
         <CheckBoxPreference
             android:key="shock"
             android:defaultValue="true"
+            android:summary="默认开启"
             android:title="触及热点时震动"/>
 
     </PreferenceCategory>

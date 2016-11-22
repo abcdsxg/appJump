@@ -1,7 +1,9 @@
 package cn.abcdsxg.app.appJump.Service;
 
 
+import android.app.ActivityManager;
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +11,7 @@ import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,7 +25,9 @@ import java.util.List;
 import cn.abcdsxg.app.appJump.Data.Adapter.PanelItemAdapter;
 import cn.abcdsxg.app.appJump.Data.Constant;
 import cn.abcdsxg.app.appJump.Data.Utils.SpUtil;
+import cn.abcdsxg.app.appJump.Data.Utils.SuUtils;
 import cn.abcdsxg.app.appJump.Data.Utils.ToolUtils;
+import cn.abcdsxg.app.appJump.Data.greenDao.AppInfo;
 import cn.abcdsxg.app.appJump.Data.greenDao.DBManager;
 import cn.abcdsxg.app.appJump.Data.greenDao.LancherInfo;
 import cn.abcdsxg.app.appJump.R;
@@ -60,15 +65,11 @@ public class TouchService extends Service implements View.OnTouchListener{
     //选中item的位置
     private int pos;
     private GridView gridView;
-
+    private boolean showBound;
     private int[] location;
 
     private void initParams(){
         getScreenParams();
-        String minDistantString=SpUtil.getStringSp(this,Constant.MINDISTANT);
-        if(minDistantString!=null) {
-            mMinDistant = Integer.valueOf(minDistantString);
-        }
     }
 
     private void getScreenParams() {
@@ -77,7 +78,12 @@ public class TouchService extends Service implements View.OnTouchListener{
     }
 
     private int getDefaultViewWidht(){
-        return SpUtil.getIntSp(this,"DefaultViewWidht");
+        String minDistantString=SpUtil.getStringSp(this,Constant.MINDISTANT);
+        if(minDistantString!=null) {
+            mMinDistant = Integer.valueOf(minDistantString);
+            return mMinDistant;
+        }
+        return 20;
     }
     @Override
     public void onCreate() {
@@ -108,14 +114,28 @@ public class TouchService extends Service implements View.OnTouchListener{
     private void initWinodwManager() {
         mWindowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         getFloatViewParams();
+        if(showBound){
+            mFloatView.setBackgroundColor(Color.RED);
+        }else{
+            mFloatView.setBackgroundColor(Color.TRANSPARENT);
+        }
         mWindowManager.addView(mFloatView,getparams());
         getTouchViewParams();
         mWindowManager.addView(mTouchToSelectView,getparams());
     }
     private void updateWindow(){
+        if(showBound){
+            mFloatView.setBackgroundColor(Color.RED);
+        }else{
+            mFloatView.setBackgroundColor(Color.TRANSPARENT);
+        }
         getFloatViewParams();
         mWindowManager.updateViewLayout(mFloatView,getparams());
+        getTouchViewParams();
+        mWindowManager.updateViewLayout(mTouchToSelectView,getparams());
     }
+
+
 
     private void showFloatView(){
         mTouchToSelectView.setVisibility(View.GONE);
@@ -153,7 +173,6 @@ public class TouchService extends Service implements View.OnTouchListener{
         WindowManager.LayoutParams wmParams = new WindowManager.LayoutParams();
         // TODO: 在设置中可以修改触发点的位置
         String slidePos = SpUtil.getStringSp(getApplicationContext(), Constant.SLIDEPOS);
-        Log.e(TAG, "pos: "+pos );
         switch (slidePos){
             case "0":
                 wmParams.gravity= Gravity.TOP | Gravity.START;
@@ -170,9 +189,8 @@ public class TouchService extends Service implements View.OnTouchListener{
             default:
                 wmParams.gravity= Gravity.TOP | Gravity.END;
         }
+        wmParams.format=PixelFormat.RGBA_8888;
         wmParams.type = WindowManager.LayoutParams.TYPE_PHONE;
-        //设置图片格式，效果为背景透明
-        wmParams.format = PixelFormat.RGBA_8888;
         //设置浮动窗口不可聚焦（实现操作除浮动窗口外的其他可见窗口的操作）
         //wmParams.flags = LayoutParams.FLAG_NOT_FOCUSABLE;
         //设置可以显示在状态栏上
@@ -193,9 +211,11 @@ public class TouchService extends Service implements View.OnTouchListener{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        showBound=SpUtil.getBooleanSp(this,Constant.SHOWBOUND);
         updateWindow();
         return START_REDELIVER_INTENT;
     }
+
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -285,6 +305,8 @@ public class TouchService extends Service implements View.OnTouchListener{
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.e(TAG, "onDestroy: " );
         removeAllWindowView();
+        startService(new Intent(this,TouchService.class));
     }
 }

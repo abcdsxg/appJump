@@ -1,7 +1,9 @@
 package cn.abcdsxg.app.appJump;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +12,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -21,6 +25,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import butterknife.BindView;
+import cn.abcdsxg.app.appJump.Activity.EditPanelActivity;
 import cn.abcdsxg.app.appJump.Activity.PreferenceSettingActivity;
 import cn.abcdsxg.app.appJump.Base.BaseActivity;
 import cn.abcdsxg.app.appJump.Data.Constant;
@@ -92,6 +97,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initDB() {
+        Log.e("tag", "initDB: " );
         DBManager dbManager=DBManager.getInstance();
         List<AppInfo> appInfos=new ArrayList<>();
         appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_MONEY,getString(R.string.zfb_zz),0,1,null));
@@ -208,6 +214,13 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(MainActivity.this, TouchService.class);
+            startService(intent);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }
