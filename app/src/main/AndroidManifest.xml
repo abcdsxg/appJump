@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.abcdsxg.app.appJump" >
 
-
+    <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />

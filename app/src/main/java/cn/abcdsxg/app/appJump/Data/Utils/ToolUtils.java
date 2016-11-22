@@ -170,6 +170,9 @@ public class ToolUtils {
         List<LancherInfo> lancherInfoList=new ArrayList<>();
         SparseArray<LancherInfo> temp=new SparseArray<>();
         String panel= SpUtil.getStringSp(context, Constant.PANEL);
+        if(panel==null){
+            panel="1";
+        }
         List<LancherInfo> localInfos= DBManager.getInstance().queryLancherInfoByPage(panel);
         for(LancherInfo info:localInfos){
             temp.put(info.getPosition(),info);

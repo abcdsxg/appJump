@@ -79,14 +79,13 @@ public class MainActivity extends BaseActivity {
     private void initData() {
         int isFirst=SpUtil.getIntSp(this,Constant.ISFIRST);
         if(isFirst==-1){
-            if(SuUtils.isRoot()) {
-                initDB();
-                SpUtil.saveSp(MainActivity.this, Constant.ISFIRST, 1);
-            }else{
+            if(!SuUtils.isRoot()) {
                 showToast(getString(R.string.rootTip));
-
             }
-        } else if(isFirst==1){
+            initDB();
+            SpUtil.saveSp(MainActivity.this, Constant.ISFIRST, 1);
+        }
+        if(isFirst==1){
             SpUtil.saveSp(this, Constant.FLUSHTIME, "1000");
             SpUtil.saveSp(this, Constant.PANEL, "1");
             SpUtil.saveSp(this, Constant.SHOCK, true);
@@ -97,7 +96,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initDB() {
-        Log.e("tag", "initDB: " );
         DBManager dbManager=DBManager.getInstance();
         List<AppInfo> appInfos=new ArrayList<>();
         appInfos.add(new AppInfo(Constant.PACKAGE_ZFB,Constant.ZFB_MONEY,getString(R.string.zfb_zz),0,1,null));

@@ -35,7 +35,7 @@
     <string name="tabTitle">支付/扫码</string>
     <string name="notif_title">点击新建自定义页面</string>
     <string name="notif_content">当前页面:</string>
-    <string name="getError">获取失败</string>
+    <string name="getError">您的设备未root，检测服务开启失败，无法新建自定义页面</string>
     <string name="editAppInfo">编辑当前AppInfo</string>
     <string name="customAppInfo">自定义AppInfo</string>
     <string name="inputError">最后两行输入的格式有误</string>

@@ -119,9 +119,14 @@ public class TouchService extends Service implements View.OnTouchListener{
         }else{
             mFloatView.setBackgroundColor(Color.TRANSPARENT);
         }
-        mWindowManager.addView(mFloatView,getparams());
-        getTouchViewParams();
-        mWindowManager.addView(mTouchToSelectView,getparams());
+        try {
+            //try catch beacuse some bitch chinses System vendors
+            mWindowManager.addView(mFloatView, getparams());
+            getTouchViewParams();
+            mWindowManager.addView(mTouchToSelectView, getparams());
+        }catch (Exception e){
+            Toast.makeText(this,"滑动服务启动失败，请手动开启悬浮窗权限",Toast.LENGTH_SHORT).show();
+        }
     }
     private void updateWindow(){
         if(showBound){
@@ -129,10 +134,15 @@ public class TouchService extends Service implements View.OnTouchListener{
         }else{
             mFloatView.setBackgroundColor(Color.TRANSPARENT);
         }
-        getFloatViewParams();
-        mWindowManager.updateViewLayout(mFloatView,getparams());
-        getTouchViewParams();
-        mWindowManager.updateViewLayout(mTouchToSelectView,getparams());
+        try {
+            //try catch beacuse some bitch chinses System vendors
+            getFloatViewParams();
+            mWindowManager.updateViewLayout(mFloatView,getparams());
+            getTouchViewParams();
+            mWindowManager.updateViewLayout(mTouchToSelectView,getparams());
+        }catch (Exception e){
+            Toast.makeText(this,"滑动服务启动失败，请手动开启悬浮窗权限",Toast.LENGTH_SHORT).show();
+        }
     }
 
 
