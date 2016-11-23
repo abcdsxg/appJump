@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">activityJump</string>
+    <string name="app_name">slideLauncher</string>
     <string name="Home">Home</string>
     <string name="Donate">Donate</string>
     <string name="Settings">Settings</string>
@@ -71,4 +71,17 @@
     <string name="exit">Exit</string>
     <string name="DoesnotExitError">The application does not exist and can not be started.</string>
     <string name="createShoreCutTitle">Create Shortcut</string>
+    <string name="lancher_fail">Failed to start, may not support the component</string>
+    <string name="position_null">No startup components are added to this location</string>
+    <string name="window_permission_tip">Sliding service failed to start, please open the Hover window permission manually</string>
+    <string name="input_panel_name">Please enter the name of the new panel</string>
+    <string name="choose_type">Please select an add type</string>
+    <string name="choose_app">Please select an application</string>
+    <string name="app">application</string>
+    <string name="shorcut">shortcut</string>
+    <string name="set_default">Do you want to set the currently added panel as the default panel?</string>
+    <string name="default_panel_text">default panel</string>
+    <string name="num_format_error">The input must be a number</string>
+    <string name="area_error">Range error, so set to default 20</string>
+    <string name="set_bound_tip">If you do not see the red border after checking, please check whether the suspension window permission is turned on</string>
 </resources>

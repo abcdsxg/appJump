@@ -47,7 +47,6 @@ import cn.abcdsxg.app.appJump.R;
  * Date   : 16-11-15 14:43
  */
 public class TouchToSelectView extends LinearLayout {
-    private static final String TAG = "TouchToSelectView";
     private int mCurrentX,mCurrentY;
 
     private static final int arcRadiu=150;

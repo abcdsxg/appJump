@@ -42,7 +42,6 @@ import cn.abcdsxg.app.appJump.View.TouchToSelectView;
 
 public class TouchService extends Service implements View.OnTouchListener{
 
-    private static final String TAG = "TouchService";
     private int mStartX,mCurrentX,mCurrentY;
     private int mScreenHeight;
     //mFloatView的宽高属性
@@ -125,7 +124,7 @@ public class TouchService extends Service implements View.OnTouchListener{
             getTouchViewParams();
             mWindowManager.addView(mTouchToSelectView, getparams());
         }catch (Exception e){
-            Toast.makeText(this,"滑动服务启动失败，请手动开启悬浮窗权限",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.window_permission_tip,Toast.LENGTH_SHORT).show();
         }
     }
     private void updateWindow(){
@@ -141,7 +140,7 @@ public class TouchService extends Service implements View.OnTouchListener{
             getTouchViewParams();
             mWindowManager.updateViewLayout(mTouchToSelectView,getparams());
         }catch (Exception e){
-            Toast.makeText(this,"滑动服务启动失败，请手动开启悬浮窗权限",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.window_permission_tip,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -163,7 +162,6 @@ public class TouchService extends Service implements View.OnTouchListener{
     private void getFloatViewParams() {
         mViewWidth= getDefaultViewWidht() ==-1 ? 20 : getDefaultViewWidht();
         mViewHeight=mScreenHeight/2;
-        Log.e(TAG, "mViewWidth: "+mViewWidth+" mViewHeight :"+mViewHeight );
     }
 
     /**
@@ -181,7 +179,6 @@ public class TouchService extends Service implements View.OnTouchListener{
 
     private WindowManager.LayoutParams getparams() {
         WindowManager.LayoutParams wmParams = new WindowManager.LayoutParams();
-        // TODO: 在设置中可以修改触发点的位置
         String slidePos = SpUtil.getStringSp(getApplicationContext(), Constant.SLIDEPOS);
         switch (slidePos){
             case "0":
@@ -260,7 +257,7 @@ public class TouchService extends Service implements View.OnTouchListener{
                     String panel= SpUtil.getStringSp(this, Constant.PANEL);
                     List<LancherInfo> infos=dbManager.queryLancherInfoByPos(pos,panel);
                     if(infos.size()==0){
-                        Toast.makeText(this,"该位置未添加启动组件",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.position_null,Toast.LENGTH_SHORT).show();
                     }else {
                         LancherInfo info=infos.get(0);
                         try {
@@ -268,7 +265,7 @@ public class TouchService extends Service implements View.OnTouchListener{
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         } catch (Exception e) {
-                            Toast.makeText(this, "启动失败，可能不支持该组件", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, R.string.lancher_fail, Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -315,7 +312,6 @@ public class TouchService extends Service implements View.OnTouchListener{
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.e(TAG, "onDestroy: " );
         removeAllWindowView();
         startService(new Intent(this,TouchService.class));
     }

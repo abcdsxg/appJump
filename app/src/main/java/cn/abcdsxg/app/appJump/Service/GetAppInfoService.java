@@ -135,7 +135,6 @@ public class GetAppInfoService extends Service {
         PowerManager powermanager;
         powermanager = (PowerManager) c.getSystemService(Context.POWER_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            Log.e("tag", "isScreenOn: "+powermanager.isInteractive() );
             return powermanager.isInteractive();
         }else{
             return powermanager.isScreenOn();

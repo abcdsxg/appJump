@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.android.vending.billing.IInAppBillingService;
 import com.umeng.analytics.MobclickAgent;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,12 +31,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.abcdsxg.app.appJump.Base.BaseFragment;
-import cn.abcdsxg.app.appJump.MainActivity;
+import cn.abcdsxg.app.appJump.Data.Utils.ToolUtils;
 import cn.abcdsxg.app.appJump.R;
-import okhttp3.OkHttpClient;
 
 /**
  * Author : 时小光
@@ -55,6 +53,8 @@ public class DonateFragment extends BaseFragment {
     LinearLayout wxText;
     @BindView(R.id.ppText)
     LinearLayout ppText;
+    @BindView(R.id.donateLayout)
+    LinearLayout donateLayout;
     private IInAppBillingService mService;
     private ServiceConnection mServiceConn;
     private String price;
@@ -68,6 +68,16 @@ public class DonateFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initBilling();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        String chanel = ToolUtils.getAppMetaData(getContext(), "UMENG_CHANNEL");
+        if (chanel.equalsIgnoreCase("googlePlay")) {
+            donateLayout.setVisibility(View.GONE);
+        }
+        Log.e("tag", "onViewCreated: " + chanel);
     }
 
     private void queryItem() {
@@ -107,7 +117,7 @@ public class DonateFragment extends BaseFragment {
                     String price = object.getString("price");
                     if (sku.equals("donate")) {
                         this.price = price;
-                        Log.e("tag", "dealBundle: "+price );
+                        Log.e("tag", "dealBundle: " + price);
                     }
                 }
             } catch (JSONException e) {
@@ -211,12 +221,19 @@ public class DonateFragment extends BaseFragment {
                     JSONObject jo = new JSONObject(purchaseData);
                     String sku = jo.getString("productId");
                     showToast("Thanks for your donate!");
-                }
-                catch (JSONException e) {
+                } catch (JSONException e) {
                     showToast("Failed to parse purchase data.");
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 }

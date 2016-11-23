@@ -8,8 +8,8 @@ android {
         applicationId "cn.abcdsxg.app.appJump"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 19
-        versionName "1.9"
+        versionCode 20
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,6 +28,7 @@ android {
     productFlavors {
 
         abcdsxg {}
+        googlePlay{}
 
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]

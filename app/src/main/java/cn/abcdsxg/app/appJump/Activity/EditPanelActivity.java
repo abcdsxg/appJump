@@ -73,7 +73,7 @@ public class EditPanelActivity extends BaseActivity {
         if(activityType.equals(Constant.EDIT_PANEL)) {
             lancherInfoList=ToolUtils.getLancherInfoList(this);
         }else if(activityType.equals(Constant.ADD_PANEL)){
-            showDialog("请输入新面板的名字");
+            showDialog(getString(R.string.input_panel_name));
             for (int i = 0; i < PanelItemAdapter.EmptyListItemSize; i++) {
                 lancherInfoList.add(null);
             }
@@ -132,7 +132,7 @@ public class EditPanelActivity extends BaseActivity {
     private void showChooSeDialog(int pos) {
         View dialogView=initShowAppView(pos,TYPE_CHOOSE);
         dialog= new AlertDialog.Builder(this)
-                .setTitle("请选择一种添加方式")
+                .setTitle(R.string.choose_type)
                 .setView(dialogView)
                 .create();
         dialog.show();
@@ -141,7 +141,7 @@ public class EditPanelActivity extends BaseActivity {
     public void showAppDialog(int pos) {
         View dialogView=initShowAppView(pos,TYPE_SHOWAPP);
         dialog= new AlertDialog.Builder(this)
-                .setTitle("请选择一个应用程序")
+                .setTitle(R.string.choose_app)
                 .setView(dialogView)
                 .create();
         dialog.show();
@@ -155,9 +155,9 @@ public class EditPanelActivity extends BaseActivity {
         switch (type){
             case TYPE_CHOOSE:
                 AppInfo app=new AppInfo();
-                app.setAppName("应用程序");
+                app.setAppName(getString(R.string.app));
                 AppInfo shortCut=new AppInfo();
-                shortCut.setAppName("快捷方式");
+                shortCut.setAppName(getString(R.string.shorcut));
                 appInfos.add(app);
                 appInfos.add(shortCut);
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -191,7 +191,6 @@ public class EditPanelActivity extends BaseActivity {
                     appInfo.setClsName(info.activityInfo.name);
                     appInfo.setAppName(info.loadLabel(getPackageManager()).toString());
                     appInfo.setPkgName(info.activityInfo.packageName);
-                    Log.e(TAG, "appName: "+appInfo.getAppName()+"  PkgName "+appInfo.getPkgName()+"  clsName "+appInfo.getClsName() );
                     appInfos.add(appInfo);
                 }
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -293,16 +292,15 @@ public class EditPanelActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && activityType.equals(Constant.ADD_PANEL)) {
             AlertDialog dialog=new AlertDialog.Builder(this)
-                    .setTitle("提示")
-                    .setMessage("是否将当前新增面板设置为默认面板?")
-                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    .setMessage(R.string.set_default)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             SpUtil.saveSp(EditPanelActivity.this,Constant.PANEL,newPanel);
                             finish();
                         }
                     })
-                    .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();

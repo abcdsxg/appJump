@@ -41,7 +41,7 @@ public class PreferenceSettingActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
-        toolbar.setTitle("设置");
+        toolbar.setTitle(R.string.Settings);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -102,7 +102,7 @@ public class PreferenceSettingActivity extends BaseActivity {
                     entryValues[i]=String.valueOf(i+1);
                 }
             }
-            entryKeys[0]="默认面板";
+            entryKeys[0]=getString(R.string.default_panel_text);
             entryValues[0]=DEFAULT_PANEL;
             panelList.setEntries(entryKeys);
             panelList.setEntryValues(entryValues);
@@ -125,10 +125,10 @@ public class PreferenceSettingActivity extends BaseActivity {
                     try {
                         minDistant = Integer.valueOf(sharedPreferences.getString(key, "20"));
                     } catch (Exception e) {
-                        Toast.makeText(context, "输入必须是数字", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.num_format_error, Toast.LENGTH_SHORT).show();
                     }
                     if (minDistant < 5 || minDistant > 80) {
-                        Toast.makeText(context, "范围错误，已设置为默认值20", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.area_error, Toast.LENGTH_SHORT).show();
                         SpUtil.saveSp(context, Constant.MINDISTANT, "20");
                     }else{
                         SpUtil.saveSp(context, Constant.MINDISTANT, sharedPreferences.getString(key, "20"));
@@ -142,8 +142,8 @@ public class PreferenceSettingActivity extends BaseActivity {
                     Intent intent = new Intent(context, TouchService.class);
                     if(sharedPreferences.getBoolean(key, false)) {
                         AlertDialog dialog=new AlertDialog.Builder(getActivity())
-                                .setMessage("勾选后如果没有看到红色边界，请检查是否开启了悬浮窗权限")
-                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                .setMessage(R.string.set_bound_tip)
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         dialogInterface.dismiss();

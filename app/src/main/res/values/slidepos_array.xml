@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="slidepos_key">
-        <item>左上角</item>
-        <item>右上角</item>
-        <item>左下角</item>
-        <item>右下角</item>
+        <item>Upper left corner</item>
+        <item>Upper right corner</item>
+        <item>Bottom left corner</item>
+        <item>Bottom right corner</item>
     </string-array>
     <string-array name="slidepos_value">
         <item>0</item>

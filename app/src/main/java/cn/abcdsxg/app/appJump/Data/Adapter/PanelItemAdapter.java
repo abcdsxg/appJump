@@ -65,7 +65,6 @@ public class PanelItemAdapter extends BaseAdapter{
             vh= (ViewHolder) view.getTag();
         }
         LancherInfo lancherInfo= lancherInfoList.get(i);
-        Log.e("tag", "getView: "+i);
         if(lancherInfo!=null){
             vh.title.setText(lancherInfo.getTitle());
             Drawable drawable=null;
