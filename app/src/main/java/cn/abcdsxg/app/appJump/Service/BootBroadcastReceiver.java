@@ -21,10 +21,8 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         SharedPreferences sp=context.getSharedPreferences(Constant.TOUCHSERVICE,Context.MODE_APPEND);
         boolean enanbleTouchService=sp.getBoolean(SpUtil.name, true);
-        Log.e("boot", "onReceive: "+enanbleTouchService );
         if(enanbleTouchService) {
             Intent service = new Intent(context, TouchService.class);
-            service.putExtra(Constant.FROM_BOOT,true);
             context.startService(service);
         }
     }

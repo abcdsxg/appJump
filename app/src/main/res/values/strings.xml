@@ -73,7 +73,7 @@
     <string name="createShoreCutTitle">Create Shortcut</string>
     <string name="lancher_fail">Failed to start, may not support the component</string>
     <string name="position_null">No startup components are added to this location</string>
-    <string name="window_permission_tip">Sliding service failed to start, please open the Hover window permission manually</string>
+    <string name="window_permission_tip">swipe service failed to start, please open the Hover window permission manually</string>
     <string name="input_panel_name">Please enter the name of the new panel</string>
     <string name="choose_type">Please select an add type</string>
     <string name="choose_app">Please select an application</string>
