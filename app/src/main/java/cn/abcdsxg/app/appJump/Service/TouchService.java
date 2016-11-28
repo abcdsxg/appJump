@@ -87,6 +87,10 @@ public class TouchService extends Service implements View.OnTouchListener{
     @Override
     public void onCreate() {
         super.onCreate();
+        initCreate();
+    }
+
+    private void initCreate() {
         initParams();
         createView();
         initWinodwManager();
@@ -218,8 +222,16 @@ public class TouchService extends Service implements View.OnTouchListener{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        showBound=SpUtil.getBooleanSp(this,Constant.SHOWBOUND);
-        updateWindow();
+        boolean startTouchService=SpUtil.getBooleanSp(this,Constant.TOUCHSERVICE);
+        if(!startTouchService){
+            stopSelf();
+        }
+        if(intent.getBooleanExtra(Constant.FROM_BOOT,false)){
+            initCreate();
+        }else {
+            showBound = SpUtil.getBooleanSp(this, Constant.SHOWBOUND);
+            updateWindow();
+        }
         return START_REDELIVER_INTENT;
     }
 

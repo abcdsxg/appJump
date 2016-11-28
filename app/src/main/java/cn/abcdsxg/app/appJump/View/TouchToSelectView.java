@@ -59,6 +59,10 @@ public class TouchToSelectView extends LinearLayout {
 
     private List<LancherInfo> lancherInfos;
 
+    private Paint circlePaint;
+
+    private ImageView circle;
+
     private int[] colors=new int[]{Color.rgb(61,201,204),
             Color.rgb(253, 241, 150),
             Color.rgb(199, 39, 103),
@@ -144,14 +148,14 @@ public class TouchToSelectView extends LinearLayout {
 
 
     private void drawCircle(Canvas canvas) {
-        Paint circlePaint=new Paint();
+        circlePaint=new Paint();
         circlePaint.setStyle(Paint.Style.STROKE);
         circlePaint.setStrokeWidth(30);
         circlePaint.setColor(getContext().getResources().getColor(R.color.colorAccent));
         canvas.drawCircle(getmCurrentX(),getmCurrentY(),arcRadiu,circlePaint);
         postInvalidateDelayed(1);
         for (int i = 0; i < PanelItemAdapter.EmptyListItemSize; i++) {
-            ImageView circle= (ImageView) gridView.getChildAt(i).findViewById(R.id.circle);
+            circle= (ImageView) gridView.getChildAt(i).findViewById(R.id.circle);
             if(isChangeColor && pos==i){
                 circle.setImageDrawable(getContext().getResources().getDrawable(R.drawable.panel_item_blue_shape));
             }else{

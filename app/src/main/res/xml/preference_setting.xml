@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <PreferenceCategory android:title="滑动面板">
+    <PreferenceCategory android:title="@string/SwipePanel">
         <ListPreference
             android:key="panel"
             android:defaultValue="1"
-            android:title="默认滑机面板"
-            android:dialogTitle="选择面板" />
+            android:title="@string/default_panel"
+            android:dialogTitle="@string/choose_panel" />
         <Preference
             android:key="editPanel"
-            android:title="编辑滑机面板"/>
+            android:title="@string/editPanel"/>
         <Preference
             android:key="addPanel"
-            android:title="添加滑机面板"/>
+            android:title="@string/add_panel"/>
     </PreferenceCategory>
-    <PreferenceCategory android:title="通知栏">
+    <PreferenceCategory android:title="@string/NotificationBar">
         <CheckBoxPreference
             android:key="showIcon"
             android:defaultValue="false"
             android:title="@string/showIcon"
             />
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/Service">
         <CheckBoxPreference
             android:key="showClsName"
             android:defaultValue="true"
@@ -28,35 +31,41 @@
         <EditTextPreference
             android:key="flushTime"
             android:defaultValue="1000"
-            android:summary="默认1000ms检测一次"
+            android:summary="@string/defaultTime"
             android:numeric="integer"
             android:title="@string/flushTime" />
+        <CheckBoxPreference
+            android:key="touchService"
+            android:defaultValue="true"
+            android:summary="@string/enable_touch_service"
+            android:title="@string/touch_service_setting_title"
+            />
     </PreferenceCategory>
-    <PreferenceCategory android:title="其他">
+    <PreferenceCategory android:title="@string/others">
         <ListPreference
             android:key="slidePos"
             android:defaultValue="1"
-            android:title="滑机位置"
+            android:title="@string/swipePos"
             android:entries="@array/slidepos_key"
             android:entryValues="@array/slidepos_value"
-            android:summary="默认从右上角"
-            android:dialogTitle="选择滑机位置" />
+            android:summary="@string/deaultSwipePos"
+            android:dialogTitle="@string/chooseSwipePos" />
         <EditTextPreference
             android:key="minDistant"
             android:defaultValue="20"
-            android:summary="可以设置5-80之间，默认是20"
+            android:summary="@string/distantSummary"
             android:numeric="integer"
-            android:title="滑机热点宽度" />
+            android:title="@string/distantWidth" />
         <CheckBoxPreference
             android:key="showBound"
             android:defaultValue="false"
-            android:summary="默认边界为透明"
-            android:title="显示热点边界"/>
+            android:summary="@string/boundSummary"
+            android:title="@string/boundTitle"/>
         <CheckBoxPreference
             android:key="shock"
             android:defaultValue="true"
-            android:summary="默认开启"
-            android:title="触及热点时震动"/>
+            android:summary="@string/shock_default"
+            android:title="@string/shock_title"/>
 
     </PreferenceCategory>
 </PreferenceScreen>

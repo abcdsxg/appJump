@@ -136,6 +136,7 @@ public class PreferenceSettingActivity extends BaseActivity {
                     }
                     break;
                 case Constant.SLIDEPOS:
+                case Constant.TOUCHSERVICE:
                     context.startService(new Intent(context,TouchService.class));
                     break;
                 case Constant.SHOWBOUND:

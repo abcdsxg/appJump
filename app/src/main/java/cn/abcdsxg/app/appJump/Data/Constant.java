@@ -34,6 +34,8 @@ public class Constant {
     public static final String   SHOCK="shock";
     public static final String   UMENG_CHANNEL="UMENG_CHANNEL";
     public static final String   SHOWBOUND="showBound";
+    public static final String   TOUCHSERVICE="touchService";
+    public static final String   FROM_BOOT="fromBoot";
 
 
 }

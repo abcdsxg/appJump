@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">slideLauncher</string>
+    <string name="app_name">SwipeLauncher</string>
     <string name="Home">Home</string>
     <string name="Donate">Donate</string>
     <string name="Settings">Settings</string>
@@ -84,4 +84,24 @@
     <string name="num_format_error">The input must be a number</string>
     <string name="area_error">Range error, so set to default 20</string>
     <string name="set_bound_tip">If you do not see the red border after checking, please check whether the suspension window permission is turned on</string>
+    <string name="Service">Service</string>
+    <string name="NotificationBar">NotificationBar</string>
+    <string name="SwipePanel">SwipePanel</string>
+    <string name="defaultTime">default detection once after 1000ms</string>
+    <string name="enable_touch_service">After starting, you can swipe out and select the launcher in any interface</string>
+    <string name="touch_service_setting_title">start swipe service</string>
+    <string name="others">Others</string>
+    <string name="swipePos">swipe position</string>
+    <string name="deaultSwipePos">default from upper right </string>
+    <string name="chooseSwipePos">choose swipe position</string>
+    <string name="distantSummary">default value is 20,you can set it  between 5 and 80</string>
+    <string name="distantWidth">swipe area width</string>
+    <string name="boundSummary">default bound is transparent</string>
+    <string name="boundTitle">show swipe area</string>
+    <string name="shock_default">default enable</string>
+    <string name="shock_title">vibrating when touching</string>
+    <string name="add_panel">add new swipe panel</string>
+    <string name="editPanel">edit swipe panel</string>
+    <string name="default_panel">default swipe panel</string>
+    <string name="choose_panel">choose panel</string>
 </resources>

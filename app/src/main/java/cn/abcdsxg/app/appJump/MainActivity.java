@@ -2,9 +2,12 @@ package cn.abcdsxg.app.appJump;
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -124,8 +127,12 @@ public class MainActivity extends BaseActivity {
                 startService(intent);
             }
         },2000);
-        Intent intent = new Intent(MainActivity.this, TouchService.class);
-        startService(intent);
+        SharedPreferences sp=getSharedPreferences(Constant.TOUCHSERVICE,MODE_APPEND);
+        boolean enanbleTouchService=sp.getBoolean(SpUtil.name, true);
+        if(enanbleTouchService) {
+            Intent intent = new Intent(MainActivity.this, TouchService.class);
+            startService(intent);
+        }
     }
 
     private void initView() {

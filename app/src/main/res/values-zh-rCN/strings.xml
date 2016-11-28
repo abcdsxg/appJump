@@ -84,4 +84,24 @@
     <string name="num_format_error">输入必须是数字</string>
     <string name="area_error">范围错误，已设置为默认值20</string>
     <string name="set_bound_tip">勾选后如果没有看到红色边界，请检查是否开启了悬浮窗权限</string>
+    <string name="Service">服务</string>
+    <string name="NotificationBar">通知栏</string>
+    <string name="SwipePanel">滑动面板</string>
+    <string name="defaultTime">默认1000ms检测一次</string>
+    <string name="enable_touch_service">开启后可在任意界面滑出选择启动器</string>
+    <string name="touch_service_setting_title">开启滑机启动服务</string>
+    <string name="others">其他</string>
+    <string name="swipePos">滑机位置</string>
+    <string name="deaultSwipePos">默认从右上角</string>
+    <string name="chooseSwipePos">选择滑机位置</string>
+    <string name="distantSummary">可以设置5-80之间，默认是20</string>
+    <string name="distantWidth">滑机热点宽度</string>
+    <string name="boundSummary">默认边界为透明</string>
+    <string name="boundTitle">显示热点边界</string>
+    <string name="shock_default">默认开启</string>
+    <string name="shock_title">触及热点时震动</string>
+    <string name="add_panel">添加滑机面板</string>
+    <string name="editPanel">编辑滑机面板</string>
+    <string name="default_panel">默认滑机面板</string>
+    <string name="choose_panel">选择面板</string>
 </resources>
