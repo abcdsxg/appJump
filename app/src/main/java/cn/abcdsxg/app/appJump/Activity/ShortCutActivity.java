@@ -59,7 +59,6 @@ public class ShortCutActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 finish();
-                System.exit(0);
             }
         }
     }

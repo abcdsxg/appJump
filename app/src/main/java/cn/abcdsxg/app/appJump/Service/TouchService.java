@@ -66,6 +66,8 @@ public class TouchService extends Service implements View.OnTouchListener{
     private GridView gridView;
     private boolean showBound;
     private int[] location;
+    //由于权限问题启动失败
+    private boolean failStart;
 
     private void initParams(){
         getScreenParams();
@@ -174,8 +176,14 @@ public class TouchService extends Service implements View.OnTouchListener{
     }
 
     private void removeAllWindowView() {
-        mWindowManager.removeView(mTouchToSelectView);
-        mWindowManager.removeView(mFloatView);
+        try{
+            mWindowManager.removeView(mTouchToSelectView);
+            mWindowManager.removeView(mFloatView);
+            failStart=false;
+        }catch (Exception e){
+            failStart=true;
+            Toast.makeText(getBaseContext(),getString(R.string.window_permission_tip),Toast.LENGTH_SHORT).show();
+        }
     }
 
     private WindowManager.LayoutParams getparams() {
@@ -318,6 +326,8 @@ public class TouchService extends Service implements View.OnTouchListener{
     public void onDestroy() {
         super.onDestroy();
         removeAllWindowView();
-        startService(new Intent(this,TouchService.class));
+        if(!failStart) {
+            startService(new Intent(this, TouchService.class));
+        }
     }
 }

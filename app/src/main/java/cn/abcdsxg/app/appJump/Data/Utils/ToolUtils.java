@@ -120,9 +120,10 @@ public class ToolUtils {
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME,appInfo.getAppName());
         // 设置图标
         Drawable drawableIcon=getAppIcon(myActivity,appInfo.getPkgName());
-
-        shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON,
-                drawableToBitamp(drawableIcon));
+        if(drawableIcon!=null) {
+            shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON,
+                    drawableToBitamp(drawableIcon));
+        }
         // 设置意图和快捷方式关联程序
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT,intent);
         //判断是在桌面创建还是传值给添加快捷方式的app
