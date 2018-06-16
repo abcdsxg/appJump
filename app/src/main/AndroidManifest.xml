@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.abcdsxg.app.appJump" >
+    package="cn.abcdsxg.app.appJump">
 
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.GET_TASKS"/>
@@ -30,7 +30,7 @@
             android:value="可自定义一键跳转指定应用的任意页面" />
         <meta-data
             android:name="xposedminversion"
-            android:value="54" />
+            android:value="30" />
 
         <activity android:name=".MainActivity" >
             <intent-filter>
@@ -41,7 +41,7 @@
         </activity>
 
         <meta-data android:value="579f00bc67e58e688e00282c" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
+        <meta-data android:value="xposed" android:name="UMENG_CHANNEL"/>
         <service android:name=".Service.GetAppInfoService"/>
         <service android:name=".Service.TouchService" />
 

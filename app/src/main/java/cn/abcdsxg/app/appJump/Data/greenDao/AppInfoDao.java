@@ -20,7 +20,7 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
     /**
      * Properties of entity AppInfo.<br/>
      * Can be used for QueryBuilder and for referencing column names.
-    */
+     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Page = new Property(1, int.class, "page", false, "page");
@@ -29,7 +29,7 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
         public final static Property ClsName = new Property(4, String.class, "clsName", false, "clsName");
         public final static Property AppName = new Property(5, String.class, "AppName", false, "AppName");
         public final static Property Extra = new Property(6, String.class, "extra", false, "extra");
-    };
+    }
 
 
     public AppInfoDao(DaoConfig config) {
@@ -166,6 +166,11 @@ public class AppInfoDao extends AbstractDao<AppInfo, Long> {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean hasKey(AppInfo entity) {
+        return entity.getId() != null;
     }
 
     @Override

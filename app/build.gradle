@@ -1,30 +1,43 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'org.greenrobot.greendao'
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    signingConfigs {
+        config {
+            keyAlias 'abcdsxg'
+            keyPassword 'syg19950627'
+            storeFile file('/Users/shingle/Dropbox/secret/key/GooglePlay.jks')
+            storePassword 'syg19950627'
+        }
+    }
+
+    flavorDimensions "channel"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.0"
     defaultConfig {
         applicationId "cn.abcdsxg.app.appJump"
         minSdkVersion 14
-        targetSdkVersion 25
-        versionCode 22
-        versionName "2.2"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        targetSdkVersion 28
+        versionCode 23
+        versionName "2.3"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def outputFile = output.outputFile
-                    output.outputFile = new File(outputFile.parent, outputFile.name.replace(".apk","-${variant.versionName}.apk"))
 
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = outputFile.name.replace(".apk","-${variant.versionName}.apk")
                 }
             }
         }
+
+        debug{
+
+        }
     }
+
+
     productFlavors {
 
         abcdsxg {}
@@ -45,21 +58,17 @@ greendao{
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    provided fileTree(dir: 'lib_xposed', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
-    compile 'com.android.support:recyclerview-v7:25.0.0'
-    compile 'com.jakewharton:butterknife:8.2.1'
-    compile 'org.greenrobot:greendao:3.0.1'
-    compile 'com.umeng.analytics:analytics:latest.integration'
-    compile 'com.zhy:okhttputils:2.6.1'
-    compile 'com.github.clans:fab:1.6.4'
-    compile 'com.github.bumptech.glide:glide:3.6.1'
-    compile 'com.google.code.gson:gson:2.7'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
-    testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support:support-annotations:25.0.0'
+    api 'com.android.support:appcompat-v7:27.0.0'
+    api 'com.android.support:design:27.0.0'
+    api 'com.android.support:recyclerview-v7:27.0.0'
+    api 'com.jakewharton:butterknife:8.2.1'
+    api 'org.greenrobot:greendao:3.2.2'
+    api 'com.umeng.analytics:analytics:latest.integration'
+    api 'com.zhy:okhttputils:2.6.1'
+    api 'com.github.clans:fab:1.6.4'
+    api 'com.github.bumptech.glide:glide:4.0.0'
+    api 'com.google.code.gson:gson:2.8.5'
+    compileOnly 'de.robv.android.xposed:api:82'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

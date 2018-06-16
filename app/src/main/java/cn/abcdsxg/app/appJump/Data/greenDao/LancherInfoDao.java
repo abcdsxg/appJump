@@ -20,7 +20,7 @@ public class LancherInfoDao extends AbstractDao<LancherInfo, Long> {
     /**
      * Properties of entity LancherInfo.<br/>
      * Can be used for QueryBuilder and for referencing column names.
-    */
+     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Title = new Property(1, String.class, "title", false, "title");
@@ -36,7 +36,7 @@ public class LancherInfoDao extends AbstractDao<LancherInfo, Long> {
         public final static Property ModDate = new Property(11, long.class, "modDate", false, "modDate");
         public final static Property Position = new Property(12, int.class, "position", false, "position");
         public final static Property Page = new Property(13, String.class, "page", false, "page");
-    };
+    }
 
 
     public LancherInfoDao(DaoConfig config) {
@@ -240,6 +240,11 @@ public class LancherInfoDao extends AbstractDao<LancherInfo, Long> {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean hasKey(LancherInfo entity) {
+        return entity.getId() != null;
     }
 
     @Override

@@ -12,8 +12,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
-import android.support.v7.app.NotificationCompat;
-import android.util.Log;
+import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 import java.util.List;
 import java.util.Timer;
@@ -65,16 +64,30 @@ public class GetAppInfoService extends Service {
         breakTask= !SpUtil.getBooleanSp(this, Constant.SHOWCLSNAME);
         //设置notification并通知
         NotificationManager nf=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification=new NotificationCompat.Builder(getApplicationContext())
-                .setAutoCancel(false)
-                .setOngoing(true)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setPriority(showIcon?NotificationCompat.PRIORITY_MAX:NotificationCompat.PRIORITY_MIN)
-                .setContentTitle(getString(R.string.notif_title))
-                .setContentText(getString(R.string.notif_content)+info.getClsName())
-                .setContentIntent(pendingIntent)
-                .build();
-        nf.notify(0,notification);
+
+        Notification notification;
+        if (Build.VERSION.SDK_INT<16) {
+            notification = new NotificationCompat.Builder(getApplicationContext())
+                    .setAutoCancel(false)
+                    .setOngoing(true)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setPriority(showIcon ? NotificationCompat.PRIORITY_MAX : NotificationCompat.PRIORITY_MIN)
+                    .setContentTitle(getString(R.string.notif_title))
+                    .setContentText(getString(R.string.notif_content) + info.getClsName())
+                    .setContentIntent(pendingIntent)
+                    .build();
+        }else{
+            notification = new Notification.Builder(getApplicationContext())
+                    .setAutoCancel(false)
+                    .setOngoing(true)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setPriority(showIcon ? Notification.PRIORITY_MAX : Notification.PRIORITY_MIN)
+                    .setContentTitle(getString(R.string.notif_title))
+                    .setContentText(getString(R.string.notif_content) + info.getClsName())
+                    .setContentIntent(pendingIntent)
+                    .build();
+        }
+        nf.notify(0, notification);
     }
 
 
